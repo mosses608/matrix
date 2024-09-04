@@ -414,7 +414,7 @@ class Controller extends BaseController
         return redirect()->back()->with('order_placed_success', 'You ordered this project successfully, wait a few minutes for our call');
     }
 
-    public function create_account(Request $request)
+    /*public function create_account(Request $request)
     {
         $accountUser = $request->validate([
             'customer_role' => 'required',
@@ -428,7 +428,39 @@ class Controller extends BaseController
         Auth::guard('account')->login($accountSet);
 
         return redirect('/')->with('login_success_msg', 'Account created successfully');
+    }*/
+
+    public function create_account(Request $request)
+{
+    // Validate input data
+    $request->validate([
+        'customer_role' => 'required',
+        'name' => 'required',
+        'username' => 'required',
+        'password' => 'required|min:8',
+    ]);
+
+    // Check if the username already exists
+    $usernameExists = Account::where('username', $request->input('username'))->exists();
+    
+    if ($usernameExists) {
+        // If username exists, return with an error message
+        return redirect()->back()->withErrors(['username' => 'Phone number already exists, login or register new one.'])->withInput();
     }
+
+    // Create the new account
+    $accountUser = $request->only(['customer_role', 'name', 'username', 'password']);
+    $accountUser['password'] = bcrypt($accountUser['password']); // Hash the password
+
+    $accountSet = Account::create($accountUser);
+
+    // Log in the user
+    Auth::guard('account')->login($accountSet);
+
+    // Redirect to homepage with success message
+    return redirect('/')->with('login_success_msg', 'Account created successfully');
+}
+
 
 
 //     public function store_projects(Request $request)
