@@ -54,7 +54,7 @@
     </form>
     
     <div class="media-screener">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br>
     </div><br>
 
     <div class="footage-steady-foot">

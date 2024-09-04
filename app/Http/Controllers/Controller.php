@@ -564,7 +564,7 @@ class Controller extends BaseController
     $componentDetails = $request->validate([
         'component_name' => 'required',
         'component_price' => 'required',
-        'component_picture.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'component_picture.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
     ]);
 
     if ($request->hasFile('component_picture')) {
