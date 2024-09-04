@@ -26,7 +26,7 @@ class Controller extends BaseController
     public function welcome()
     {
         return view('welcome', [
-            'projects' => Project::latest()->filter(request(['search']))->paginate(6),
+            'projects' => Project::latest()->filter(request(['search']))->paginate(4),
             'notifications' => Notification::latest()->get(),
         ]);
     }

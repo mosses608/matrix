@@ -1,6 +1,40 @@
 @extends('layout')
 
 @section('content')
+
+<style>
+    /* Container for the content and load-more button */
+#content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
+}
+
+#projects-container {
+    width: 100%;
+    max-width: 1200px; /* Adjust to your desired width */
+}
+
+#load-more-container {
+    margin: 20px 0; /* Space between the projects container and the button */
+    text-align: center;
+}
+
+#load-more {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#load-more:hover {
+    background-color: #0056b3; /* Adjust hover color as needed */
+}
+
+</style>
 <br><br><br>
 
 <x-logout_message />
@@ -49,18 +83,40 @@
         @if(count($projects) == 0)
         <p>No project availlable here!</p>
         @endif
-        @foreach ($projects as $project)
-        <div class="items-loaded-viewer">
-            <div class="video-builder-holder">
-                <video src="{{ $project->project_video ? asset('storage/' . $project->project_video): asset('assets/videos/project_vide.mp4') }}" controls loop width="720" height="360" muted autoplay></video>
+        <div id="content-container">
+            <div id="projects-container" class="centered-ajax-component-loader">
+                @foreach ($projects as $project)
+                <div class="items-loaded-viewer">
+                    <div class="video-builder-holder">
+                        <video 
+                            src="{{ $project->project_video ? asset('storage/' . $project->project_video) : asset('assets/videos/project_video.mp4') }}" 
+                            controls 
+                            loop 
+                            width="720" 
+                            height="360" 
+                            muted 
+                            autoplay
+                        ></video>
+                    </div>
+                    <h1>{{ $project->project_name }}</h1><br><br>
+                    <div class="footer-component-clon">
+                        <button class="more-readable-view">
+                            <a href="/admin/read-more/{{ $project->id }}">Read More &#8594;</a>
+                        </button>
+                        <p>Posted on: {{ $project->created_at->format('F j, Y') }}</p>
+                    </div><br><br>
+                </div>
+                @endforeach
             </div>
-            <h1>{{ $project->project_name }}</h1><br><br>
-            <div class="footer-component-clon">
-                <button class="more-readbale-view"><a href="/admin/read-more/{{ $project->id }}">Read More &#8594;</a></button>
-                <p>Posted on: {{ $project->created_at }}</p>
-            </div><br><br>
+        
+            @if ($projects->hasMorePages())
+            <div id="load-more-container">
+                <button id="load-more" data-next-page="{{ $projects->currentPage() + 1 }}" data-total-pages="{{ $projects->lastPage() }}">Load More</button>
+            </div>
+            @endif
         </div>
-        @endforeach
+        
+  
         {{-- <div class="paginate-builder-complex">
             {{ $projects->links() }}
         </div> --}}
@@ -114,6 +170,36 @@
             });
         }
     </script>
+
+<script>
+    document.getElementById('load-more')?.addEventListener('click', function() {
+        const button = this;
+        const nextPage = button.getAttribute('data-next-page');
+        const totalPages = button.getAttribute('data-total-pages');
+
+        if (parseInt(nextPage) > parseInt(totalPages)) {
+            button.style.display = 'none'; // Hide button if no more pages
+            return;
+        }
+
+        fetch(`?page=${nextPage}`)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newProjects = doc.querySelector('#projects-container').innerHTML;
+                document.querySelector('#projects-container').innerHTML += newProjects;
+
+                if (!doc.querySelector('#load-more')) {
+                    button.style.display = 'none'; // Hide button if no more pages
+                } else {
+                    button.setAttribute('data-next-page', parseInt(nextPage) + 1);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+
 
     <script>
         const autoChanger=document.querySelectorAll('.scrollable-component-container .notified-wrapper-ajax');
