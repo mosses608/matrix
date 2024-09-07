@@ -1,21 +1,23 @@
-@extends('layout')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>House | of | Matrix | Home | Page</title>
+    <!--<link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">-->
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-<style>
-    /* Container for the content and load-more button */
-#content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers the content horizontally */
-}
+    <!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
 
-#projects-container {
-    width: 100%;
-    max-width: 1200px; /* Adjust to your desired width */
-}
-
-#load-more-container {
+        <style>
+            #load-more-container {
     margin: 20px 0; /* Space between the projects container and the button */
     text-align: center;
 }
@@ -34,142 +36,287 @@
     background-color: #0056b3; /* Adjust hover color as needed */
 }
 
-</style>
-<br><br><br>
 
-<x-logout_message />
+/* Mobile view styling */
+@media (max-width: 767px) {
+    .content, .container-fluid {
+        margin-left: 0; /* Remove left margin */
+        width: 100%; /* Keep full width */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items */
+    }
+}
+        </style>
 
-<x-error_message />
+</head>
 
-<x-login_success_msg />
-
-<x-feedback_sent />
-
-<center>
-
-    <div class="centered-ajax-bosy-wrapper">
-        <div class="social-media-platform-wrapper">
-            <a href="https://www.facebook.com/House of Matrix" id="face-book-fab"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.twitter.com/@houseofmatrixtz" id="twitter-fab"><i class="fab fa-twitter"></i></a>
-            <a href="https://youtube.com/@HouseofMatrix-bc6xr" target="_blank" id="youtube-fab"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/Houseofmatrixtz" id="ig-fab"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/+255742582428" id="tsap-fab"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <form action="/" method="GET" class="search-itmes-loaded">
-            @csrf
-            <input type="text" name="search" id="" placeholder="Searh projects here........." class="search-filter">
-            <button type="submit"><i class="fa fa-search"></i> <span id="search-item">Search</span></button>
-        </form>
-
-        <script>
-            const formSearch=document.querySelector('.search-itmes-loaded');
-            const searchInput=document.querySelector('.search-filter');
-
-            formSearch.addEventListener('submit', function(e){
-                e.preventDefault();
-                const searchInputValue = searchInput.value;
-                if(searchInputValue===""){
-                    alert('You can not search an empty thing!');
-                }
-            })
-        </script>
-
-        <div class="min-sub-main-component">
-            <button class="toggle-view-mobile-viewer-wrapper" onclick="showSideMenusMobile()">&#9776;</button>
-        </div>
-    </div><div id="line-breaker-line"><br><br></div>
-    <div class="centered-ajax-component-loader">
-        <h2><span>Posted Projects</span> | <a href="#">View All</a></h2><br><br>
-        @if(count($projects) == 0)
-        <p>No project availlable here!</p>
-        @endif
-        <div id="content-container">
-            <div id="projects-container" class="centered-ajax-component-loader">
-                @foreach ($projects as $project)
-                <div class="items-loaded-viewer">
-                    <div class="video-builder-holder">
-                        <video 
-                            src="{{ $project->project_video ? asset('storage/' . $project->project_video) : asset('assets/videos/project_video.mp4') }}" 
-                            controls 
-                            loop 
-                            width="720" 
-                            height="360" 
-                            muted 
-                            autoplay
-                        ></video>
+<body>
+    <div class="main-wrapper">
+        <div style="background-color: #17345b;" class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
+                <a style="color: #fff" href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
+                        height="30">-->MTX</a>
+                <a href="javascript:void(0);" id="toggle_btn"><span
+                        class="bar-icon"><span></span><span></span><span></span></span></a>
+            </div>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search project...">
+                    <button class="btn" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+            <!--<ul class="nav user-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link pr-0" data-toggle="dropdown"><i data-feather="bell"></i>
+                        <span class="badge badge-pill"></span></a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar avatar-sm"><img class="avatar-img rounded-circle" alt=""
+                                                    src="assets/img/profiles/avatar-02.jpg"></span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Brian Johnson</span>
+                                                    paid the invoice <span class="noti-title">#DF65485</span></p>
+                                                <p class="noti-time"><span class="notification-time">4 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar avatar-sm"><img class="avatar-img rounded-circle" alt=""
+                                                    src="assets/img/profiles/avatar-03.jpg"></span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Marie Canales</span>
+                                                    has accepted your estimate <span
+                                                        class="noti-title">#GTR458789</span></p>
+                                                <p class="noti-time"><span class="notification-time">6 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <div class="avatar avatar-sm">
+                                                <span class="avatar-title rounded-circle bg-primary-light"><i
+                                                        class="far fa-user"></i></span>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">New user
+                                                        registered</span></p>
+                                                <p class="noti-time"><span class="notification-time">8 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <span class="avatar avatar-sm"><img class="avatar-img rounded-circle" alt=""
+                                                    src="assets/img/profiles/avatar-04.jpg"></span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Barbara Moore</span>
+                                                    declined the invoice <span class="noti-title">#RDW026896</span></p>
+                                                <p class="noti-time"><span class="notification-time">12 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="notification-message">
+                                    <a href="activities.html">
+                                        <div class="media">
+                                            <div class="avatar avatar-sm">
+                                                <span class="avatar-title rounded-circle bg-info-light"><i
+                                                        class="far fa-comment"></i></span>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">You have received a new
+                                                        message</span></p>
+                                                <p class="noti-time"><span class="notification-time">2 days ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="activities.html">View all Notifications</a>
+                        </div>
                     </div>
-                    <h1>{{ $project->project_name }}</h1><br><br>
-                    <div class="footer-component-clon">
-                        <button class="more-readable-view">
-                            <a href="/admin/read-more/{{ $project->id }}">Read More &#8594;</a>
-                        </button>
-                        <p>Posted on: {{ $project->created_at->format('F j, Y') }}</p>
-                    </div><br><br>
+                </li>-->
+                <!--<li class="nav-item dropdown has-arrow main-drop">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><span class="user-img"><img
+                                src="assets/img/profile.jpg" alt=""><span
+                                class="status online"></span></span><span>Kavin Hansen</span></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="profile.html"><i data-feather="user" class="mr-1"></i>
+                            Profile</a>
+                        <a class="dropdown-item" href="settings.html"><i data-feather="settings" class="mr-1"></i>
+                            Settings</a>
+                        <a class="dropdown-item" href="login.html"><i data-feather="log-out" class="mr-1"></i>
+                            Logout</a>
+                    </div>
+                </li>
+            </ul>-->
+            <div class="dropdown mobile-user-menu show">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right ">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-                @endforeach
             </div>
-        
-            @if ($projects->hasMorePages())
-            <div id="load-more-container">
-                <button id="load-more" data-next-page="{{ $projects->currentPage() + 1 }}" data-total-pages="{{ $projects->lastPage() }}">Load More</button>
-            </div>
-            @endif
         </div>
-        
-  
-        {{-- <div class="paginate-builder-complex">
-            {{ $projects->links() }}
-        </div> --}}
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div class="sidebar-contents">
+                    <div  id="sidebar-menu" class="sidebar-menu">
+                        <div class="mobile-show">
+                            <div class="offcanvas-menu">
+                                <div class="user-info align-center bg-theme text-center">
+                                    <span class="lnr lnr-cross  text-white" id="mobile_btn_close">X</span>
+                                    <!--<a href="javascript:void(0)" class="d-block menu-style text-white">
+                                        <div class="user-avatar d-inline-block mr-3">
+                                            
+                                        </div>
+                                    </a>-->
+                                    <img style="width: 100%; height: 100%;" src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar"
+                                    >
+                                </div>
+                            </div>
+                            <div class="sidebar-input">
+                                <div class="top-nav-search">
+                                    <form>
+                                        <input type="text" class="form-control" placeholder="Search here">
+                                        <button class="btn" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li class="active">
+                                <a href="/"><img src="assets/img/home.svg" alt="sidebar_img">
+                                    <span>Home</span></a>
+                            </li>
+                            <li>
+                                <a href="/order-components"><img src="assets/img/employee.svg" alt="sidebar_img"><span>
+                                        Order Components</span></a>
+                            </li>
+                            <li>
+                                <a href="company.html"><img src="assets/img/company.svg" alt="sidebar_img"> <span>
+                                        News</span></a>
+                            </li>
+                            <li>
+                                <a href="calendar.html"><img src="assets/img/calendar.svg" alt="sidebar_img">
+                                    <span>About Us</span></a>
+                            </li>
+                            <li>
+                                <a href="leave.html"><img src="assets/img/leave.svg" alt="sidebar_img">
+                                    <span>Log In</span></a>
+                            </li>
+                            <li>
+                                <a href="review.html"><img src="assets/img/review.svg"
+                                        alt="sidebar_img"><span>FAQs</span></a>
+                            </li>
+                            <li>
+                                <a href="report.html"><img src="assets/img/report.svg"
+                                        alt="sidebar_img"><span>Feedback</span></a>
+                            </li>
+                            <!--<li>
+                                <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
+                                    <span>Manage</span></a>
+                            </li>-->
+                            <!--<li>
+                                <a href="settings.html"><img src="assets/img/settings.svg"
+                                        alt="sidebar_img"><span>Settings</span></a>
+                            </li>
+                            <li>
+                                <a href="profile.html"><img src="assets/img/profile.svg" alt="sidebar_img">
+                                    <span>Profile</span></a>
+                            </li>-->
+                        </ul>
+                        <ul class="logout">
+                            <li>
+                                <a href="profile.html"><img src="assets/img/logout.svg" alt="sidebar_img"><span>Log
+                                        out</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <div class="row centered-ajax-component-loader" id="projects-container">
+                    
+                    @foreach ($projects as $project)
+    <div class="col-xl-6 d-flex" style="padding: 5px;"> <!-- Reduced padding for less space between columns -->
+        <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;"> <!-- Reduced padding -->
+            <video style="width: 100%; height: 250px;"
+                src="{{ $project->project_video ? asset('storage/' . $project->project_video) : asset('assets/videos/project_video.mp4') }}"
+                controls loop muted autoplay></video>
+            <h6 style="margin-top: 5px;">{{ $project->project_name }}</h6> <!-- Reduced margin-top -->
+            <div class="footer-component-clon" style="margin-top: 5px;"> <!-- Reduced margin-top -->
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="margin: 0;">Posted on: {{ $project->created_at->format('F j, Y') }}</p>
+                    <button style="background-color: #0000FF; border: none; height: 30px; border-radius: 10px;">
+                        <a style="color: #fff; text-decoration: none;" href="/admin/read-more/{{ $project->id }}">Read More</a>
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="news-boarder-builder-selector">
-        <h2><span>Posted News</span> | <a href="#">View All</a></h2><br><br>
-        <div class="scrollable-component-container">
-            @foreach ($notifications as $notify)
-            <section class="notified-wrapper-ajax">
-            <h3>Title: {{ $notify->news_title }}</h3>
-            @if ($notify->news_picture !="")
-            <div class="non-empty-picture">
-                <img src="{{ $notify->news_picture ? asset('storage/' . $notify->news_picture): asset('assets/images/profile.jpg') }}" alt="News Picture">
+@endforeach
+
+                </div>
+                <div>
+                    @if ($projects->hasMorePages())
+                        <div id="load-more-container">
+                            <button id="load-more" data-next-page="{{ $projects->currentPage() + 1 }}"
+                                data-total-pages="{{ $projects->lastPage() }}">Load More</button>
+                        </div>
+                    @endif
+                </div>
             </div>
-                <p>{{ $notify->description }} <em>Posted on {{ $notify->created_at }}</em></p>
-            @endif
-            </section>
-            @endforeach
         </div>
     </div>
-    <button class="scrollToTopButton" onclick="scrollToTop()">&#8593;</button>
 
-    <div class="media-screener">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </div><br>
-    <form action="/feedback" method="POST" class="comment-users-commente">
-        @csrf
-        <input type="text" name="message" placeholder="Tell us your comments on our services"><button type="submit"><i class="fa fa-paper-plane"></i></button>
-    </form>
-        <br><br>
-    <div class="footage-steady-foot">
-    <div class="footer-steady">
-    <img src="{{asset('assets/images/matrix-logo.png')}}" alt="Logo Picture"><br>
-            <div class="social-media-panel">
-                <a href="https://www.facebook.com/House of Matrix" id="face-book-fab"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.twitter.com/@houseofmatrixtz" id="twitter-fab"><i class="fab fa-twitter"></i></a>
-                <a href="https://youtube.com/@HouseofMatrix-bc6xr" id="youtube-fab"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/Houseofmatrixtz" id="ig-fab"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/+255742582428" id="tsap-fab"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    <p>Copyright &copy; <span class="currentDate"></span> House of Matrix. All Right Reserved.</p><div class="media-query"><br><br></div>
-</div>
-
-
-    <script>
-        function scrollToTop(){
-            window.scrollTo({
-                top:0,
-                behavior: 'smooth',
-            });
-        }
-    </script>
+    
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/feather.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+<script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
+<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+<script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
 
 <script>
     document.getElementById('load-more')?.addEventListener('click', function() {
@@ -201,24 +348,6 @@
 </script>
 
 
-    <script>
-        const autoChanger=document.querySelectorAll('.scrollable-component-container .notified-wrapper-ajax');
-        const intervalTime=8000;
-        let initialComponent=0;
+</body>
 
-        function showNextContent(){
-            autoChanger[initialComponent].style.display='none';
-            initialComponent++;
-
-            if(initialComponent>=autoChanger.length){
-                initialComponent=0;
-            }
-
-            autoChanger[initialComponent].style.display='block';
-        }
-
-        setInterval(showNextContent,intervalTime);
-    </script>
-</center>
-
-@endsection
+</html>

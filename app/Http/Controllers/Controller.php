@@ -29,6 +29,7 @@ class Controller extends BaseController
             'projects' => Project::latest()->filter(request(['search']))->paginate(4),
             'notifications' => Notification::latest()->get(),
         ]);
+
     }
 
     public function register_user()
@@ -581,11 +582,24 @@ class Controller extends BaseController
         return redirect()->back()->with('feedback_sent','Comment posted successfully!');
     }
 
-    public function go_to_order(){
+    /*public function go_to_order(){
         return view('order-components',[
-            'components' => Component::latest()->filter(request(['search']))->paginate(10),
+            'components' => Component::latest()->filter(request(['search']))->paginate(4),
         ]);
+    }*/
+
+    public function go_to_order()
+{
+    $components = Component::latest()->filter(request(['search']))->paginate(4);
+
+    if (request()->ajax()) {
+        return view('partials.components', compact('components'))->render(); // Render the partial view only
     }
+
+    return view('order-components', compact('components')); // For non-AJAX, render full view
+}
+
+
 
     public function add_compoenent(){
         return view('admin.add-component');
