@@ -478,7 +478,7 @@ class Controller extends BaseController
     Auth::guard('account')->login($accountSet);
 
     // Redirect to homepage with success message
-    return redirect('/')->with('login_success_msg', 'Account created successfully');
+    return redirect('/mainpage')->with('login_success_msg', 'Account created successfully');
 }
 
 
