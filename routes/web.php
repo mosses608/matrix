@@ -16,6 +16,8 @@ use App\Http\Controllers\ProjectController;
 
 Route::get('/', [Controller::class, 'welcome']);
 
+Route::get('/mainpage', [Controller::class, 'mainpageSignedIn']);
+
 Route::get('/register', [Controller::class, 'register_user']);
 
 Route::get('/main-dashboard', [Controller::class, 'main_dashboard']);
@@ -93,6 +95,9 @@ Route::post('/notifications', [Controller::class, 'store_news'])->middleware('au
 
 Route::get('/admin/read-more/{project}', [Controller::class, 'read_more']);
 
+Route::get('/logedin/read-more/{project}', [Controller::class, 'read_moreLogedIn']);
+
+
 Route::post('/orders', [Controller::class, 'store_my_orders']);
 
 Route::post('/accounts', [Controller::class, 'create_account']);
@@ -113,11 +118,15 @@ Route::post('/feedback', [Controller::class, 'store_comments']);
 
 Route::get('/order-components',[Controller::class, 'go_to_order']);
 
+Route::get('/logedin-order-components',[Controller::class, 'go_to_orderLogedIn']);
+
 Route::get('/admin/add-component', [Controller::class, 'add_compoenent']);
 
 Route::post('/components', [Controller::class, 'store_components']);
 
 Route::get('/order-component/{component}', [Controller::class, 'order_component']);
+
+Route::get('/order_componentLogedIn/{component}', [Controller::class, 'order_componentLogedIn']);
 
 Route::post('/comporders', [Controller::class, 'store_component_orders']);
 
@@ -131,6 +140,12 @@ Route::delete('/comporders/delete/{order}', [Controller::class, 'delete_comp_ord
 
 Route::get('/about', [Controller::class, 'about']);
 
+Route::get('/aboutLogedIn', [Controller::class, 'aboutLogedIn']);
+
 Route::get('/contact', [Controller::class, 'contact_us']);
 
 Route::get('/news', [Controller::class, 'our_news']);
+
+Route::get('/logedInnews', [Controller::class, 'logedInnews']);
+
+Route::post('/submit-order', [Controller::class, 'submitOrder']);

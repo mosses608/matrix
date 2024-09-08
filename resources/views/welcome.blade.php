@@ -225,23 +225,23 @@
                                         Order Components</span></a>
                             </li>
                             <li>
-                                <a href="company.html"><img src="assets/img/company.svg" alt="sidebar_img"> <span>
+                                <a href="/news"><img src="assets/img/company.svg" alt="sidebar_img"> <span>
                                         News</span></a>
                             </li>
                             <li>
-                                <a href="calendar.html"><img src="assets/img/calendar.svg" alt="sidebar_img">
+                                <a href="/about"><img src="assets/img/calendar.svg" alt="sidebar_img">
                                     <span>About Us</span></a>
                             </li>
                             <li>
-                                <a href="leave.html"><img src="assets/img/leave.svg" alt="sidebar_img">
+                                <a href="/login"><img src="assets/img/leave.svg" alt="sidebar_img">
                                     <span>Log In</span></a>
                             </li>
                             <li>
-                                <a href="review.html"><img src="assets/img/review.svg"
+                                <a href=""><img src="assets/img/review.svg"
                                         alt="sidebar_img"><span>FAQs</span></a>
                             </li>
                             <li>
-                                <a href="report.html"><img src="assets/img/report.svg"
+                                <a href=""><img src="assets/img/report.svg"
                                         alt="sidebar_img"><span>Feedback</span></a>
                             </li>
                             <!--<li>
@@ -257,12 +257,7 @@
                                     <span>Profile</span></a>
                             </li>-->
                         </ul>
-                        <ul class="logout">
-                            <li>
-                                <a href="profile.html"><img src="assets/img/logout.svg" alt="sidebar_img"><span>Log
-                                        out</span></a>
-                            </li>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>

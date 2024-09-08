@@ -32,6 +32,16 @@ class Controller extends BaseController
 
     }
 
+    public function mainpageSignedIn()
+    {
+        return view('mainpage', [
+            'projects' => Project::latest()->filter(request(['search']))->paginate(4),
+            'notifications' => Notification::latest()->get(),
+        ]);
+
+    }
+
+
     public function register_user()
     {
         return view('register');
@@ -202,9 +212,9 @@ class Controller extends BaseController
             return redirect('/admin/admin-dashboard')->with('login_accepted', 'Admin logged in successfully');
         } elseif (Auth::guard('account')->attempt($loginCredentials)) {
             $request->session()->regenerateToken();
-            return redirect('/')->with('login_success', 'You are successful logged in');
+            return redirect('/mainpage')->with('login_success', 'You are successful logged in');
         } else {
-            return redirect()->back()->with('error_message', 'Incorrect username or password!');
+            return redirect()->back()->withErrors(['login_error' => 'Incorrect username or password. Please try again.']);
         }
     }
 
@@ -402,6 +412,15 @@ class Controller extends BaseController
         ]);
     }
 
+    //after loged in
+    public function read_moreLogedIn($id)
+    {
+        return view('admin.read-moreLogedIn', [
+            'project' => Project::find($id),
+        ]);
+    }
+
+
     public function store_my_orders(Request $request)
     {
         $orderDetailsPlace = $request->validate([
@@ -503,8 +522,8 @@ class Controller extends BaseController
     {
         $projectDetails = $request->validate([
             'project_name' => 'required',
-            'project_video' => 'required|file|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:20000',
-            'project_picture' => 'required|file|mimetypes:application/pdf|max:10000',
+            'project_video' => 'required|file|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:40000',
+            'project_picture' => 'required|file|mimetypes:application/pdf|max:40000',
         ]);
 
         if ($request->hasFile('project_picture')) {
@@ -599,6 +618,17 @@ class Controller extends BaseController
     return view('order-components', compact('components')); // For non-AJAX, render full view
 }
 
+public function go_to_orderLogedIn()
+{
+    $components = Component::latest()->filter(request(['search']))->paginate(4);
+
+    if (request()->ajax()) {
+        return view('partials.components', compact('components'))->render(); // Render the partial view only
+    }
+
+    return view('order-componentsLogedIn', compact('components')); // For non-AJAX, render full view
+}
+
 
 
     public function add_compoenent(){
@@ -636,6 +666,12 @@ class Controller extends BaseController
 
     public function order_component($id){
         return view('order-component',[
+            'component' => Component::find($id),
+        ]);
+    }
+
+    public function order_componentLogedIn($id){
+        return view('order-componentLogedIn',[
             'component' => Component::find($id),
         ]);
     }
@@ -685,6 +721,11 @@ class Controller extends BaseController
         return view('about');
     }
 
+    public function aboutLogedIn(){
+        return view('aboutLogedIn');
+    }
+
+
     public function contact_us(){
         return view('contact');
     }
@@ -695,5 +736,31 @@ class Controller extends BaseController
         ]);
     }
 
+    public function logedInnews(){
+        return view('logedInnews',[
+            'notifications' => Notification::latest()->get(),
+        ]);
+    }
+
+
+    public function submitOrder(Request $request)
+    {
+       // Validate the incoming request data
+       $validatedData = $request->validate([
+        'project_name' => 'required|string|max:255',
+        'name' => 'required|string|max:255',
+        'contact' => 'required|string|max:20',
+        'status' => 'required|string|max:50',
+    ]);
+
+    // Create a new order with validated data
+    Order::create($validatedData);
+
+    // Redirect to a success page or return a response
+    return redirect()->route('order.success')->with('success', 'Order submitted successfully!');
+    }
+
 }
+
+
 
