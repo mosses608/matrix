@@ -207,7 +207,7 @@ class Controller extends BaseController
         ]);
 
         // Attempt to log in with the 'account' guard first
-    if (Auth::guard('account')->attempt($loginCredentials)) {
+    if (Auth::guard('account')->attempt(['username' => $loginCredentials['username'], 'password' => $loginCredentials['password']])) {
         $request->session()->regenerateToken();
         return redirect('/mainpage')->with('login_success', 'You are successfully logged in');
     } elseif (Auth::guard('web')->attempt($loginCredentials)) {
@@ -470,8 +470,8 @@ class Controller extends BaseController
 
     // Create the new account
     $accountUser = $request->only(['customer_role', 'name', 'username', 'password']);
-    $accountUser['password'] = bcrypt($accountUser['password']); // Hash the password
-
+    //$accountUser['password'] = bcrypt($accountUser['password']); // Hash the password
+    $accountUser['password'] = $accountUser['password'];
     $accountSet = Account::create($accountUser);
 
     // Log in the user
@@ -479,6 +479,7 @@ class Controller extends BaseController
 
     // Redirect to homepage with success message
     return redirect('/mainpage')->with('login_success_msg', 'Account created successfully');
+
 }
 
 

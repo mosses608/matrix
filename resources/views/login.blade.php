@@ -462,12 +462,12 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <div class="custom-control custom-checkbox">
+                                                            <!--<div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input"
                                                                     id="cb1">
                                                                 <label class="custom-control-label" for="cb1">Remember
                                                                     me</label>
-                                                            </div>
+                                                            </div>-->
                                                         </div>
                                                         <div class="col-6 text-right">
                                                             <a class="forgot-link" href="forgot-password.html">Forgot
