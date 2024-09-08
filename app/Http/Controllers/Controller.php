@@ -206,16 +206,16 @@ class Controller extends BaseController
             'password' => 'required',
         ]);
 
-        if (Auth::guard('web')->attempt($loginCredentials)) {
-
-            $request->session()->regenerateToken();
-            return redirect('/admin/admin-dashboard')->with('login_accepted', 'Admin logged in successfully');
-        } elseif (Auth::guard('account')->attempt($loginCredentials)) {
-            $request->session()->regenerateToken();
-            return redirect('/mainpage')->with('login_success', 'You are successful logged in');
-        } else {
-            return redirect()->back()->withErrors(['login_error' => 'Incorrect username or password. Please try again.']);
-        }
+        // Attempt to log in with the 'account' guard first
+    if (Auth::guard('account')->attempt($loginCredentials)) {
+        $request->session()->regenerateToken();
+        return redirect('/mainpage')->with('login_success', 'You are successfully logged in');
+    } elseif (Auth::guard('web')->attempt($loginCredentials)) {
+        $request->session()->regenerateToken();
+        return redirect('/admin/admin-dashboard')->with('login_accepted', 'Admin logged in successfully');
+    } else {
+        return redirect()->back()->withErrors(['login_error' => 'Incorrect username or password. Please try again.']);
+    }
     }
 
     public function personal_profile()
