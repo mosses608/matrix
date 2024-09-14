@@ -26,4 +26,10 @@ class Service extends Model
     {
         return self::where('id', $id)->first();
     }
+
+    //code for relationship
+    public function serviceItems()
+    {
+        return $this->hasMany(ServiceItem::class);
+    }
 }
