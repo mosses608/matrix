@@ -15,6 +15,40 @@
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+
+        <style>
+            #load-more-container {
+    margin: 20px 0; /* Space between the projects container and the button */
+    text-align: center;
+}
+
+#load-more {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#load-more:hover {
+    background-color: #0056b3; /* Adjust hover color as needed */
+}
+
+
+/* Mobile view styling */
+@media (max-width: 767px) {
+    .content, .container-fluid {
+        margin-left: 0; /* Remove left margin */
+        width: 100%; /* Keep full width */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items */
+    }
+}
+        </style>
+
 </head>
 
 <body>
@@ -22,14 +56,14 @@
         <div style="background-color: #17345b;" class="header">
             <div class="header-left">
                 <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
-                <a href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
+                <a style="color: #fff" href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
                         height="30">-->MTX</a>
                 <a href="javascript:void(0);" id="toggle_btn"><span
                         class="bar-icon"><span></span><span></span><span></span></span></a>
             </div>
             <div class="top-nav-search">
                 <form>
-                    <input type="text" class="form-control" placeholder="">
+                    <input type="text" class="form-control" placeholder="Search project...">
                     <button class="btn" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
@@ -156,17 +190,18 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-contents">
-                    <div id="sidebar-menu" class="sidebar-menu">
+                    <div  id="sidebar-menu" class="sidebar-menu">
                         <div class="mobile-show">
                             <div class="offcanvas-menu">
                                 <div class="user-info align-center bg-theme text-center">
                                     <span class="lnr lnr-cross  text-white" id="mobile_btn_close">X</span>
-                                    <a href="javascript:void(0)" class="d-block menu-style text-white">
+                                    <!--<a href="javascript:void(0)" class="d-block menu-style text-white">
                                         <div class="user-avatar d-inline-block mr-3">
-                                            <img src="assets/img/profiles/avatar-18.jpg" alt="user avatar"
-                                                class="rounded-circle" width="50">
+                                            
                                         </div>
-                                    </a>
+                                    </a>-->
+                                    <img style="width: 100%; height: 100%;" src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar"
+                                    >
                                 </div>
                             </div>
                             <div class="sidebar-input">
@@ -190,10 +225,6 @@
                                         Order Components</span></a>
                             </li>
                             <li>
-                                <a href="/login"><img src="assets/img/leave.svg" alt="sidebar_img">
-                                    <span>Log In</span></a>
-                            </li>
-                            <li>
                                 <a href="/news"><img src="assets/img/company.svg" alt="sidebar_img"> <span>
                                         News</span></a>
                             </li>
@@ -201,7 +232,18 @@
                                 <a href="/about"><img src="assets/img/calendar.svg" alt="sidebar_img">
                                     <span>About Us</span></a>
                             </li>
-                           
+                            <li>
+                                <a href="/login"><img src="assets/img/leave.svg" alt="sidebar_img">
+                                    <span>Log In</span></a>
+                            </li>
+                            <li>
+                                <a href=""><img src="assets/img/review.svg"
+                                        alt="sidebar_img"><span>Services</span></a>
+                            </li>
+                            <!--<li>
+                                <a href=""><img src="assets/img/report.svg"
+                                        alt="sidebar_img"><span>Feedback</span></a>
+                            </li>-->
                             <!--<li>
                                 <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
                                     <span>Manage</span></a>
@@ -221,46 +263,41 @@
             </div>
         </div>
         <div class="page-wrapper">
+            <div class="content container-fluid">
+
+            <div class="row centered-ajax-component-loader" id="projects-container">
+                @foreach ($services as $service)
+                <div class="col-xl-6 d-flex" style="padding: 5px;">
+                    <a style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;" href="/detailed-service/{{ $service->id }}">
+                    <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                    <div>
+                        @if($service->serviceImage)
+                            <img src="{{ asset('storage/' . $service->serviceImage) }}" alt="{{ $service->serviceName }}" style="width: 100px; height: auto;">
+                        @else
+                            No Image
+                        @endif
+                    </div>
+                        
+                        <h6 style="margin-top: 10px;">Service Name: {{ $service->serviceName }}</h6>
+                  
+                    </div>
+                </a>
+                </div>
+            @endforeach
+            </div>
+
+            </div>
         </div>
     </div>
-    <script id="dashboard-template" type="text/x-handlebars-template">
-     <div class="content container-fluid">
-   
-        <center><h1>About Us</h1></center>
-        <div class="centered-ajax0parag">
-            <p><strong>Hous of Matrix</strong> is a Technological Organization which was established in November 2022 in Mbeya, Tanzani. e aimed at creating communityscience family with people who are passionate and depply engage with Technology and innovation with Electronics</p>
-            <p><strong>House of Matrix</strong> mostly based on the Technology innovation and we offer the following services:</p>
-            <p>
-            <ul>
-                <li><i class="fa fa-check"></i> Incubator Design</li><br>
-                <li><i class="fa fa-check"></i> Circuit Design and Prototyping</li><br>
-                <li><i class="fa fa-check"></i> Proteus and Matlab Simulation</li><br>
-                <li><i class="fa fa-check"></i> Camera and Electrical Fence Installation</li><br>
-                <li><i class="fa fa-check"></i> Software Design and Web Application Development</li><br>
-                <li><i class="fa fa-check"></i> Electrical and Electronics Lab Srvices</li><br>
-                <li><i class="fa fa-check"></i> Micro-controller programming such as Arduino, Esp and Pic</li><br>
-                <li><i class="fa fa-check"></i> Computer Servicing and Windows Installation</li><br>
-                <li><i class="fa fa-check"></i> Selling Electrical and Electronics Components</li><br>
-                <li><i class="fa fa-check"></i> Mechanical Design of Materials</li><br>
-                <li><i class="fa fa-check"></i> Solar Backup installation</li><br>
-                <li><i class="fa fa-check"></i> Wiring, Electrical installation and Automation</li><br>
-            </ul>
-            </p>
-            <p>We have our own workshops for Electrical, Electronics and Mechnical which offer all services based on the field</p>
-            <p>Also we have Electrical and Electronics store which offer different Electronics Materials for Automation, Artificial Intelligence and Internet of Things. They include Micro-controller</p>
-            <ul>
-                <li><i class="fa fa-check"></i> Arduino Uno</li><br>
-                <li><i class="fa fa-check"></i> Rasberry Pi</li><br>
-                <li><i class="fa fa-check"></i> ESP Controller</li><br>
-                <li><i class="fa fa-check"></i> PIC Controller</li><br>
-                <li><i class="fa fa-check"></i> Different Sensor like Utrasonic</li><br>
-                <li><i class="fa fa-check"></i> Wiring Material like cables, Bulb, Solar etc</li><br>
-            </ul>
-            <p>We as <strong>House of Matrix (HOM)</strong>, the community science family we belive that, in Technology nothing is impossible, lets do it.</p>
+
+    
+                </div>
+               
+            </div>
         </div>
-   
-</div>   
-</script>
+    </div>
+
+    
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -271,6 +308,36 @@
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
 <script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
+
+<script>
+    document.getElementById('load-more')?.addEventListener('click', function() {
+        const button = this;
+        const nextPage = button.getAttribute('data-next-page');
+        const totalPages = button.getAttribute('data-total-pages');
+
+        if (parseInt(nextPage) > parseInt(totalPages)) {
+            button.style.display = 'none'; // Hide button if no more pages
+            return;
+        }
+
+        fetch(`?page=${nextPage}`)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newProjects = doc.querySelector('#projects-container').innerHTML;
+                document.querySelector('#projects-container').innerHTML += newProjects;
+
+                if (!doc.querySelector('#load-more')) {
+                    button.style.display = 'none'; // Hide button if no more pages
+                } else {
+                    button.setAttribute('data-next-page', parseInt(nextPage) + 1);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+
 
 </body>
 

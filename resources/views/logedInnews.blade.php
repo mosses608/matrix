@@ -236,14 +236,7 @@
                                 <a href="login"><img src="assets/img/leave.svg" alt="sidebar_img">
                                     <span>Log In</span></a>
                             </li>
-                            <li>
-                                <a href=""><img src="assets/img/review.svg"
-                                        alt="sidebar_img"><span>FAQs</span></a>
-                            </li>
-                            <li>
-                                <a href=""><img src="assets/img/report.svg"
-                                        alt="sidebar_img"><span>Feedback</span></a>
-                            </li>
+                            
                             <!--<li>
                                 <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
                                     <span>Manage</span></a>

@@ -6,48 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>House | of | Matrix | Home | Page</title>
     <!--<link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">-->
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 
-        <style>
-            #load-more-container {
-    margin: 20px 0; /* Space between the projects container and the button */
-    text-align: center;
-}
+    <style>
+        #load-more-container {
+            margin: 20px 0;
+            /* Space between the projects container and the button */
+            text-align: center;
+        }
 
-#load-more {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff; /* Adjust color as needed */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        #load-more {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            /* Adjust color as needed */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-#load-more:hover {
-    background-color: #0056b3; /* Adjust hover color as needed */
-}
+        #load-more:hover {
+            background-color: #0056b3;
+            /* Adjust hover color as needed */
+        }
 
 
-/* Mobile view styling */
-@media (max-width: 767px) {
-    .content, .container-fluid {
-        margin-left: 0; /* Remove left margin */
-        width: 100%; /* Keep full width */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center items */
-    }
-}
-        </style>
+        /* Mobile view styling */
+        @media (max-width: 767px) {
+
+            .content,
+            .container-fluid {
+                margin-left: 0;
+                /* Remove left margin */
+                width: 100%;
+                /* Keep full width */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                /* Center items */
+            }
+        }
+    </style>
 
 </head>
 
@@ -56,8 +64,10 @@
         <div style="background-color: #17345b;" class="header">
             <div class="header-left">
                 <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
-                <a style="color: #fff" href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
-                        height="30">-->MTX</a>
+                <a style="color: #fff" href="index.html" class="logo logo-small">
+                    <!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
+                        height="30">-->MTX
+                </a>
                 <a href="javascript:void(0);" id="toggle_btn"><span
                         class="bar-icon"><span></span><span></span><span></span></span></a>
             </div>
@@ -163,7 +173,7 @@
                         </div>
                     </div>
                 </li>-->
-                <!--<li class="nav-item dropdown has-arrow main-drop">
+            <!--<li class="nav-item dropdown has-arrow main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><span class="user-img"><img
                                 src="assets/img/profile.jpg" alt=""><span
                                 class="status online"></span></span><span>Kavin Hansen</span></a>
@@ -190,7 +200,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-contents">
-                    <div  id="sidebar-menu" class="sidebar-menu">
+                    <div id="sidebar-menu" class="sidebar-menu">
                         <div class="mobile-show">
                             <div class="offcanvas-menu">
                                 <div class="user-info align-center bg-theme text-center">
@@ -200,8 +210,8 @@
                                             
                                         </div>
                                     </a>-->
-                                    <img style="width: 100%; height: 100%;" src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar"
-                                    >
+                                    <img style="width: 100%; height: 100%;"
+                                        src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar">
                                 </div>
                             </div>
                             <div class="sidebar-input">
@@ -237,13 +247,13 @@
                                     <span>Log In</span></a>
                             </li>
                             <li>
-                                <a href=""><img src="assets/img/review.svg"
-                                        alt="sidebar_img"><span>FAQs</span></a>
+                                <a href="/services"><img src="assets/img/review.svg"
+                                        alt="sidebar_img"><span>Services</span></a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href=""><img src="assets/img/report.svg"
                                         alt="sidebar_img"><span>Feedback</span></a>
-                            </li>
+                            </li>-->
                             <!--<li>
                                 <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
                                     <span>Manage</span></a>
@@ -257,7 +267,7 @@
                                     <span>Profile</span></a>
                             </li>-->
                         </ul>
-                        
+
                     </div>
                 </div>
             </div>
@@ -266,55 +276,60 @@
             <div class="content container-fluid">
 
                 <div class="row centered-ajax-component-loader" id="projects-container">
-                    
+
                     @foreach ($projects as $project)
-    <div class="col-xl-6 d-flex" style="padding: 5px;"> <!-- Reduced padding for less space between columns -->
-        <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;"> <!-- Reduced padding -->
-            <video style="width: 100%; height: 250px;"
-                src="{{ $project->project_video ? asset('storage/' . $project->project_video) : asset('assets/videos/project_video.mp4') }}"
-                controls loop muted autoplay></video>
-            <h6 style="margin-top: 5px;">{{ $project->project_name }}</h6> <!-- Reduced margin-top -->
-            <div class="footer-component-clon" style="margin-top: 5px;"> <!-- Reduced margin-top -->
+                    <div class="col-xl-6 d-flex" style="padding: 5px;">
+                        <!-- Reduced padding for less space between columns -->
+                        <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                            <!-- Reduced padding -->
+                            <video style="width: 100%; height: 250px;"
+                                src="{{ $project->project_video ? asset('storage/' . $project->project_video) : asset('assets/videos/project_video.mp4') }}"
+                                controls loop muted autoplay></video>
+                            <h6 style="margin-top: 5px;">{{ $project->project_name }}</h6> <!-- Reduced margin-top -->
+                            <div class="footer-component-clon" style="margin-top: 5px;">
+                                <!-- Reduced margin-top -->
 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <p style="margin: 0;">Posted on: {{ $project->created_at->format('F j, Y') }}</p>
-                    <button style="background-color: #0000FF; border: none; height: 30px; border-radius: 10px;">
-                        <a style="color: #fff; text-decoration: none;" href="/admin/read-more/{{ $project->id }}">Read More</a>
-                    </button>
-                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <p style="margin: 0;">Posted on: {{ $project->created_at->format('F j, Y') }}</p>
+                                    <button
+                                        style="background-color: #0000FF; border: none; height: 30px; border-radius: 10px;">
+                                        <a style="color: #fff; text-decoration: none;"
+                                            href="/admin/read-more/{{ $project->id }}">Read More</a>
+                                    </button>
+                                </div>
 
-            </div>
-        </div>
-    </div>
-@endforeach
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
 
                 </div>
                 <div>
                     @if ($projects->hasMorePages())
-                        <div id="load-more-container">
-                            <button id="load-more" data-next-page="{{ $projects->currentPage() + 1 }}"
-                                data-total-pages="{{ $projects->lastPage() }}">Load More</button>
-                        </div>
+                    <div id="load-more-container">
+                        <button id="load-more" data-next-page="{{ $projects->currentPage() + 1 }}"
+                            data-total-pages="{{ $projects->lastPage() }}">Load More</button>
+                    </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 
-    
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/feather.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-<script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
-<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
-<script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
 
-<script>
-    document.getElementById('load-more')?.addEventListener('click', function() {
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
+
+    <script>
+        document.getElementById('load-more')?.addEventListener('click', function() {
         const button = this;
         const nextPage = button.getAttribute('data-next-page');
         const totalPages = button.getAttribute('data-total-pages');
@@ -340,7 +355,7 @@
             })
             .catch(error => console.error('Error:', error));
     });
-</script>
+    </script>
 
 
 </body>

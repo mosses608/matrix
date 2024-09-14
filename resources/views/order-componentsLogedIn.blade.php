@@ -231,15 +231,7 @@
                                 <a href="/aboutLogedIn"><img src="assets/img/calendar.svg" alt="sidebar_img">
                                     <span>About Us</span></a>
                             </li>
-                            
-                            <li>
-                                <a href=""><img src="assets/img/review.svg"
-                                        alt="sidebar_img"><span>FAQs</span></a>
-                            </li>
-                            <li>
-                                <a href=""><img src="assets/img/report.svg"
-                                        alt="sidebar_img"><span>Feedback</span></a>
-                            </li>
+                           
                             <!--<li>
                                 <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
                                     <span>Manage</span></a>

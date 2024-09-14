@@ -149,3 +149,11 @@ Route::get('/news', [Controller::class, 'our_news']);
 Route::get('/logedInnews', [Controller::class, 'logedInnews']);
 
 Route::post('/submit-order', [Controller::class, 'submitOrder']);
+
+Route::get('/services', [Controller::class, 'getAllServices']);
+
+Route::get('/admin/get-services-page', [Controller::class, 'AdminServices']);
+
+Route::post('/admin/added-service', [Controller::class, 'AdminAddService']);
+
+Route::get('/detailed-service/{id}', [Controller::class, 'detailedService']);

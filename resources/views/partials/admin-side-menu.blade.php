@@ -19,6 +19,7 @@
         <a href="/admin/projects"><i class="fa fa-angle-right"></i> View Projects</a>
         <a href="/admin/add-component"><i class="fa fa-angle-right"></i> Add Components</a>
         <a href="/admin/view-components"><i class="fa fa-angle-right"></i> View Components</a>
+        <a href="/admin/get-services-page"><i class="fa fa-angle-right"></i> Add Service</a>
     </div>
     <div class="feedbacks-view-side" onclick="showHiddenFeedback()">
         <i class="fa fa-comments"></i> <span><a href="#">News & Feedbacks <i class="fa fa-angle-down"></i></a></span>
