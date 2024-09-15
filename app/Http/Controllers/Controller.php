@@ -7,6 +7,7 @@ use App\Models\Feedback;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\Service;
+use App\Models\ServiceItem;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\User;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\Component;
 use App\Models\Comporder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str; // Add this at the top of the controller
 
 class Controller extends BaseController
@@ -70,6 +72,41 @@ class Controller extends BaseController
 
     public function adminAddServiceItem($id, $serviceName){
         return view('admin.admin-add-serviceItem', compact('id', 'serviceName'));
+    }
+
+    public function adminStoreServiceItem(Request $request){
+
+        //dd($request->all());
+
+       // Validate the incoming request
+       $validatedData = $request->validate([
+        'itemName' => 'required|string|max:255',
+        'price' => 'required|string|max:255',
+        'phoneNo' => 'required|string|max:15',
+        'location' => 'required|string|max:255',
+        'itemImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000',
+    ]);
+
+    // Handle the file upload (if present)
+    $imagePath = null;
+    if ($request->hasFile('itemImage')) {
+        $imagePath = $request->file('itemImage')->store('service_images', 'public');
+    }
+
+
+    // Create the new service item and associate it with the service
+    ServiceItem::create([
+        'service_id' => $request->input('serviceID'),
+        'itemName' => $validatedData['itemName'],
+        'itemPrice' => $validatedData['price'],
+        'itemImage' => $imagePath,
+        'phoneNumber' => $validatedData['phoneNo'],
+        'location' => $validatedData['location'],
+    ]);
+
+     // Redirect back with success message
+     return redirect()->back()->with('success', 'Service item added successfully!');
+
     }
 
     public function mainpageSignedIn()

@@ -31,7 +31,7 @@
         </div>
         <br>
 
-        <form action="/admin/added-service" method="POST" class="add-new-product-cloud" enctype="multipart/form-data">
+        <form action="/admin-store-service-item" method="POST" class="add-new-product-cloud" enctype="multipart/form-data">
             @csrf
             
             <h1>Add Service Item into <spna style="color: green">{{ $serviceName }}</spna></h1><br>
@@ -41,6 +41,7 @@
                 {{ session('success') }}
             </div>
         @endif
+            <input style="height: 20px;" type="hidden" name="serviceID" id="serviceID" value="{{ $id }}">
             <label for="">Item Name:</label>
             <input type="text" name="itemName" id="itemName" placeholder="Item Name"><br><br>
             <label for="">Item Price:</label>
@@ -49,9 +50,9 @@
             <input type="text" name="phoneNo" id="phoneNo" placeholder="Phone Number"><br><br>
             <label for="">Location:</label>
             <input type="text" name="location" id="location" placeholder="location"><br><br>
-            <label for="">Service Image</label>
-            <input type="file" name="serviceImage" id="serviceImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
-            <button type="submit">Add New Service</button><br><br>
+            <label for="">Item Image</label>
+            <input type="file" name="itemImage" id="itemImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
+            <button type="submit">Add Item</button><br><br>
         </form>
 
 

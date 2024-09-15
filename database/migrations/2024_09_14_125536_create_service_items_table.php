@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Auto-incrementing primary key
             $table->foreignId('service_id')->constrained()->onDelete('cascade'); // Foreign key
             $table->string('itemName');
-            $table->decimal('itemPrice', 8, 2);
+            $table->string('itemPrice');
             $table->string('itemImage')->nullable();
             $table->string('phoneNumber');
             $table->string('location');
