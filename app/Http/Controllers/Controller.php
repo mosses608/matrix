@@ -48,6 +48,7 @@ class Controller extends BaseController
         ]);
     }
 
+
     public function detailedService($id){
        // Retrieve the service by ID
        $service = Service::find($id);
@@ -59,6 +60,16 @@ class Controller extends BaseController
 
        // Pass the service to the view
        return view('detailed-services', ['service' => $service]);
+    }
+
+    public function admingetAllServices(){
+        return view('admin.admin-get-all-services', [
+            'adminServices' => Service::latest()->filter(request(['search']))->paginate(4),
+        ]);
+    }
+
+    public function adminAddServiceItem($id, $serviceName){
+        return view('admin.admin-add-serviceItem', compact('id', 'serviceName'));
     }
 
     public function mainpageSignedIn()

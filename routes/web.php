@@ -157,3 +157,7 @@ Route::get('/admin/get-services-page', [Controller::class, 'AdminServices']);
 Route::post('/admin/added-service', [Controller::class, 'AdminAddService']);
 
 Route::get('/detailed-service/{id}', [Controller::class, 'detailedService']);
+
+Route::get('/admin-get-all-services', [Controller::class, 'admingetAllServices']);
+
+Route::get('/admin-add-service-item/{id}/{serviceName}', [Controller::class, 'adminAddServiceItem']);
