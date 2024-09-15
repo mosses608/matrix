@@ -18,6 +18,11 @@ class ServiceItem extends Model
         'location',
     ];
 
+    // Cast itemImage attribute to array
+    protected $casts = [
+        'itemImage' => 'array',
+    ];
+
     public function service()
     {
         return $this->belongsTo(Service::class);

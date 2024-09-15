@@ -158,8 +158,12 @@ Route::post('/admin/added-service', [Controller::class, 'AdminAddService']);
 
 Route::get('/detailed-service/{id}', [Controller::class, 'detailedService']);
 
+Route::get('/loged-in-detailed-service/{id}', [Controller::class, 'logedInDetailedService']);
+
 Route::get('/admin-get-all-services', [Controller::class, 'admingetAllServices']);
 
 Route::get('/admin-add-service-item/{id}/{serviceName}', [Controller::class, 'adminAddServiceItem']);
 
 Route::post('/admin-store-service-item', [Controller::class, 'adminStoreServiceItem']);
+
+Route::get('/loged-in-services', [Controller::class, 'getAllServicesLogedIn']);

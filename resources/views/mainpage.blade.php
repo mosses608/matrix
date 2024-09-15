@@ -233,6 +233,10 @@
                                     <span>About Us</span></a>
                             </li>
                            
+                            <li>
+                                <a href="/loged-in-services"><img src="assets/img/review.svg"
+                                        alt="sidebar_img"><span>Services</span></a>
+                            </li>
                             <!--<li>
                                 <a href="manage.html"><img src="assets/img/manage.svg" alt="sidebar_img">
                                     <span>Manage</span></a>

@@ -279,7 +279,7 @@ button.next {
                                         News</span></a>
                             </li>
                             <li>
-                                <a href="/about"><img src="assets/img/calendar.svg" alt="sidebar_img">
+                                <a href="/aboutLogedIn"><img src="assets/img/calendar.svg" alt="sidebar_img">
                                     <span>About Us</span></a>
                             </li>
                             <li>
@@ -287,7 +287,7 @@ button.next {
                                     <span>Log In</span></a>
                             </li>
                             <li>
-                                <a href="/services"><img src="assets/img/review.svg"
+                                <a href="/loged-in-services"><img src="assets/img/review.svg"
                                         alt="sidebar_img"><span>Services</span></a>
                             </li>
                             <!--<li>

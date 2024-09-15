@@ -242,13 +242,14 @@
                                 <a href="/about"><img src="assets/img/calendar.svg" alt="sidebar_img">
                                     <span>About Us</span></a>
                             </li>
-                            <li>
-                                <a href="/login"><img src="assets/img/leave.svg" alt="sidebar_img">
-                                    <span>Log In</span></a>
-                            </li>
+                            
                             <li>
                                 <a href="/services"><img src="assets/img/review.svg"
                                         alt="sidebar_img"><span>Services</span></a>
+                            </li>
+                            <li>
+                                <a href="/login"><img src="assets/img/leave.svg" alt="sidebar_img">
+                                    <span>Log In</span></a>
                             </li>
                             <!--<li>
                                 <a href=""><img src="assets/img/report.svg"

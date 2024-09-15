@@ -51,7 +51,7 @@
             <label for="">Location:</label>
             <input type="text" name="location" id="location" placeholder="location"><br><br>
             <label for="">Item Image</label>
-            <input type="file" name="itemImage" id="itemImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
+            <input type="file" name="itemImage[]" id="itemImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
             <button type="submit">Add Item</button><br><br>
         </form>
 

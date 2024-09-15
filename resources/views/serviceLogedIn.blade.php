@@ -6,96 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>House | of | Matrix | Home | Page</title>
     <!--<link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">-->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 
-    <style>
-        #load-more-container {
-            margin: 20px 0;
-            /* Space between the projects container and the button */
-            text-align: center;
-        }
-
-        #load-more {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            /* Adjust color as needed */
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #load-more:hover {
-            background-color: #0056b3;
-            /* Adjust hover color as needed */
-        }
-
-
-        /* Mobile view styling */
-        @media (max-width: 767px) {
-
-            .content,
-            .container-fluid {
-                margin-left: 0;
-                /* Remove left margin */
-                width: 100%;
-                /* Keep full width */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                /* Center items */
-            }
-        }
-
-        .image-slider {
-    position: relative;
-    width: 100%;
-    max-width: 600px; /* Adjust as needed */
-    height: auto;
-    margin: auto;
-    overflow: hidden;
+        <style>
+            #load-more-container {
+    margin: 20px 0; /* Space between the projects container and the button */
+    text-align: center;
 }
 
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-button.prev, button.next {
-    position: absolute;
-    top: 50%;
-    width: auto;
-    background-color: transparent;
-    height: 40px;
-    color: green;
+#load-more {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transform: translateY(-50%);
-    z-index: 1000;
 }
 
-button.prev {
-    left: 10px;
+#load-more:hover {
+    background-color: #0056b3; /* Adjust hover color as needed */
 }
 
-button.next {
-    right: 10px;
+
+/* Mobile view styling */
+@media (max-width: 767px) {
+    .content, .container-fluid {
+        margin-left: 0; /* Remove left margin */
+        width: 100%; /* Keep full width */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items */
+    }
 }
-    </style>
+        </style>
 
 </head>
 
@@ -104,10 +56,8 @@ button.next {
         <div style="background-color: #17345b;" class="header">
             <div class="header-left">
                 <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
-                <a style="color: #fff" href="index.html" class="logo logo-small">
-                    <!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
-                        height="30">-->MTX
-                </a>
+                <a style="color: #fff" href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
+                        height="30">-->MTX</a>
                 <a href="javascript:void(0);" id="toggle_btn"><span
                         class="bar-icon"><span></span><span></span><span></span></span></a>
             </div>
@@ -213,7 +163,7 @@ button.next {
                         </div>
                     </div>
                 </li>-->
-            <!--<li class="nav-item dropdown has-arrow main-drop">
+                <!--<li class="nav-item dropdown has-arrow main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><span class="user-img"><img
                                 src="assets/img/profile.jpg" alt=""><span
                                 class="status online"></span></span><span>Kavin Hansen</span></a>
@@ -240,7 +190,7 @@ button.next {
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-contents">
-                    <div id="sidebar-menu" class="sidebar-menu">
+                    <div  id="sidebar-menu" class="sidebar-menu">
                         <div class="mobile-show">
                             <div class="offcanvas-menu">
                                 <div class="user-info align-center bg-theme text-center">
@@ -250,8 +200,8 @@ button.next {
                                             
                                         </div>
                                     </a>-->
-                                    <img style="width: 100%; height: 100%;"
-                                        src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar">
+                                    <img style="width: 100%; height: 100%;" src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar"
+                                    >
                                 </div>
                             </div>
                             <div class="sidebar-input">
@@ -287,7 +237,7 @@ button.next {
                                     <span>Log In</span></a>
                             </li>
                             <li>
-                                <a href="/services"><img src="assets/img/review.svg"
+                                <a href="/loged-in-services"><img src="assets/img/review.svg"
                                         alt="sidebar_img"><span>Services</span></a>
                             </li>
                             <!--<li>
@@ -307,73 +257,60 @@ button.next {
                                     <span>Profile</span></a>
                             </li>-->
                         </ul>
-
+                        
                     </div>
                 </div>
             </div>
         </div>
         <div class="page-wrapper">
             <div class="content container-fluid">
-                @if($serviceItems->isEmpty())
-                <h6>No items added</h6>
-                @else
-                <div class="row centered-ajax-component-loader" id="projects-container">
-                    @foreach ($serviceItems as $item)
-                    <div class="col-xl-6 d-flex" style="padding: 5px;">
 
-                        <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
-                            <div style="text-align: center;">
-                                @if($item->itemImage)
-                                @php
-                                    $images = json_decode($item->itemImage);
-                                @endphp
-                                <div class="image-slider">
-                                    <div class="slides">
-                                        @foreach($images as $image)
-                                            <div class="slide">
-                                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $item->itemName }}"
-                                                     style="width: 100%; height: 300px;">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <button class="prev" onclick="prevSlide()">❮</button>
-                                    <button class="next" onclick="nextSlide()">❯</button>
-                                </div>
-                            @else
-                                No Image
-                            @endif
-                            </div>
-                            <h6 style="margin-top: 10px;">Item Name: {{ $item->itemName }}</h6>
-
-                            <h6 style="margin-top: 10px;">Item Price: {{ $item->itemPrice }}</h6>
-
-                            <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
-
-                            <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6>
-                        </div>
-
+            <div class="row centered-ajax-component-loader" id="projects-container">
+                @foreach ($services as $service)
+                <div class="col-xl-6 d-flex" style="padding: 5px;">
+                    <a style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;" href="/loged-in-detailed-service/{{ $service->id }}">
+                    <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                    <div>
+                        @if($service->serviceImage)
+                            <img src="{{ asset('storage/' . $service->serviceImage) }}" alt="{{ $service->serviceName }}" style="width: 100px; height: auto;">
+                        @else
+                            No Image
+                        @endif
                     </div>
-                    @endforeach
+                        
+                        <h6 style="margin-top: 10px;">Service Name: {{ $service->serviceName }}</h6>
+                  
+                    </div>
+                </a>
                 </div>
-                @endif
+            @endforeach
+            </div>
+
             </div>
         </div>
     </div>
 
+    
+                </div>
+               
+            </div>
+        </div>
+    </div>
 
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    <script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
+    
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/feather.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+<script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
+<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+<script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
 
-    <script>
-        document.getElementById('load-more')?.addEventListener('click', function() {
+<script>
+    document.getElementById('load-more')?.addEventListener('click', function() {
         const button = this;
         const nextPage = button.getAttribute('data-next-page');
         const totalPages = button.getAttribute('data-total-pages');
@@ -399,53 +336,6 @@ button.next {
             })
             .catch(error => console.error('Error:', error));
     });
-    </script>
-
-<script>
-    function copyToClipboard(text) {
-        // Create a temporary input element
-        var tempInput = document.createElement("input");
-        // Set its value to the text to be copied
-        tempInput.value = text;
-        // Append it to the body
-        document.body.appendChild(tempInput);
-        // Select the text
-        tempInput.select();
-        // Execute the copy command
-        document.execCommand("copy");
-        // Remove the temporary input element
-        document.body.removeChild(tempInput);
-        // Optionally, alert the user that the text was copied
-        alert("Phone number copied to clipboard!");
-    }
-</script>
-
-<script>
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        const slides = document.querySelector('.slides');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        if (index >= totalSlides) {
-            currentSlide = 0;
-        } else if (index < 0) {
-            currentSlide = totalSlides - 1;
-        } else {
-            currentSlide = index;
-        }
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-        showSlide(currentSlide - 1);
-    }
-
-    // Optionally, you can auto-slide
-    // setInterval(nextSlide, 5000);
 </script>
 
 </body>

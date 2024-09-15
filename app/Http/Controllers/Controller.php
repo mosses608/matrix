@@ -46,7 +46,20 @@ class Controller extends BaseController
         //return view('services.index', ['services' => $services]);
 
         return view('services', [
-            'services' => Service::latest()->filter(request(['search']))->paginate(4),
+            'services' => Service::latest()->filter(request(['search']))->paginate(20),
+        ]);
+    }
+
+    public function getAllServicesLogedIn()
+    {
+        // Retrieve all services from the database
+        //$services = Service::all();
+
+        // Pass the services to the view
+        //return view('services.index', ['services' => $services]);
+
+        return view('serviceLogedIn', [
+            'services' => Service::latest()->filter(request(['search']))->paginate(20),
         ]);
     }
 
@@ -60,9 +73,34 @@ class Controller extends BaseController
            return redirect()->back()->with('error', 'Service not found');
        }
 
-       // Pass the service to the view
-       return view('detailed-services', ['service' => $service]);
+       // Retrieve all service items associated with the service
+    $serviceItems = $service->serviceItems; // Assuming the relationship is set up correctly in the Service model
+
+    // Pass the service and service items to the view
+    return view('detailed-services', [
+        'service' => $service,
+        'serviceItems' => $serviceItems,
+    ]);
     }
+
+    public function logedInDetailedService($id){
+        // Retrieve the service by ID
+        $service = Service::find($id);
+ 
+        // Check if service exists
+        if (!$service) {
+            return redirect()->back()->with('error', 'Service not found');
+        }
+ 
+        // Retrieve all service items associated with the service
+     $serviceItems = $service->serviceItems; // Assuming the relationship is set up correctly in the Service model
+ 
+     // Pass the service and service items to the view
+     return view('detailed-service-logedin', [
+         'service' => $service,
+         'serviceItems' => $serviceItems,
+     ]);
+     }
 
     public function admingetAllServices(){
         return view('admin.admin-get-all-services', [
@@ -84,13 +122,22 @@ class Controller extends BaseController
         'price' => 'required|string|max:255',
         'phoneNo' => 'required|string|max:15',
         'location' => 'required|string|max:255',
-        'itemImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000',
+        'itemImage.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000',
     ]);
 
     // Handle the file upload (if present)
-    $imagePath = null;
+    /*$imagePath = null;
     if ($request->hasFile('itemImage')) {
         $imagePath = $request->file('itemImage')->store('service_images', 'public');
+    }*/
+
+    // Handle file uploads
+    $imagePaths = [];
+    if ($request->hasFile('itemImage')) {
+        foreach ($request->file('itemImage') as $file) {
+            // Store each image and get its path
+            $imagePaths[] = $file->store('service_images', 'public');
+        }
     }
 
 
@@ -99,7 +146,7 @@ class Controller extends BaseController
         'service_id' => $request->input('serviceID'),
         'itemName' => $validatedData['itemName'],
         'itemPrice' => $validatedData['price'],
-        'itemImage' => $imagePath,
+        'itemImage' => json_encode($imagePaths), // Store paths as JSON array
         'phoneNumber' => $validatedData['phoneNo'],
         'location' => $validatedData['location'],
     ]);

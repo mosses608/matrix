@@ -30,6 +30,6 @@ class Service extends Model
     //code for relationship
     public function serviceItems()
     {
-        return $this->hasMany(ServiceItem::class);
+        return $this->hasMany(ServiceItem::class, 'service_id');
     }
 }
