@@ -366,7 +366,7 @@
         popup.style.top = '50%';
         popup.style.transform = 'translate(-50%, -50%)';
         popup.style.maxWidth = '80%';  // Adjust as needed
-        popup.style.width = 'auto';   // Allows width to adjust dynamically
+        popup.style.width = '100%';   // Allows width to adjust dynamically
         popup.style.height = 'auto';  // Allows height to adjust dynamically
         popup.style.padding = '20px';
         popup.style.background = '#fff';

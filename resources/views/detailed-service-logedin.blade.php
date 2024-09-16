@@ -319,7 +319,7 @@ button.next {
                 @else
                 <div class="row centered-ajax-component-loader" id="projects-container">
                     @foreach ($serviceItems as $item)
-                    <div class="col-xl-6 d-flex" style="padding: 5px;">
+                    <div class="col-xl-3 d-flex" style="padding: 5px;">
 
                         <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
                             <div style="text-align: center;">
@@ -332,7 +332,7 @@ button.next {
                                         @foreach($images as $image)
                                             <div class="slide">
                                                 <img src="{{ asset('storage/' . $image) }}" alt="{{ $item->itemName }}"
-                                                     style="width: 100%; height: 300px;">
+                                                     style="width: 100%; height: auto;">
                                             </div>
                                         @endforeach
                                     </div>

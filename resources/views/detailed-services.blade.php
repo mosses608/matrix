@@ -319,7 +319,7 @@ button.next {
                 @else
                 <div class="row centered-ajax-component-loader" id="projects-container">
                     @foreach ($serviceItems as $item)
-                    <div class="col-xl-6 d-flex" style="padding: 5px;">
+                    <div class="col-xl-3 d-flex" style="padding: 5px;">
 
                         <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
                             <div style="text-align: center;">
@@ -467,7 +467,7 @@ button.next {
         popup.style.top = '50%';
         popup.style.transform = 'translate(-50%, -50%)';
         popup.style.maxWidth = '80%';  // Adjust as needed
-        popup.style.width = 'auto';   // Allows width to adjust dynamically
+        popup.style.width = '100%';   // Allows width to adjust dynamically
         popup.style.height = 'auto';  // Allows height to adjust dynamically
         popup.style.padding = '20px';
         popup.style.background = '#fff';

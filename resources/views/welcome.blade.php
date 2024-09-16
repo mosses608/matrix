@@ -279,7 +279,7 @@
                 <div class="row centered-ajax-component-loader" id="projects-container">
 
                     @foreach ($projects as $project)
-                    <div class="col-xl-6 d-flex" style="padding: 5px;">
+                    <div class="col-xl-4 d-flex" style="padding: 5px;">
                         <!-- Reduced padding for less space between columns -->
                         <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
                             <!-- Reduced padding -->

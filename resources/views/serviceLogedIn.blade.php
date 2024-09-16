@@ -267,11 +267,11 @@
 
             <div class="row centered-ajax-component-loader" id="projects-container">
                 @foreach ($services as $service)
-                <div class="col-xl-6 d-flex" style="padding: 5px;">
+                <div class="col-xl-3 d-flex" style="padding: 5px;">
                     <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
-                    <div>
+                    <div style="display: flex; justify-content: center; align-items: center;">
                         @if($service->serviceImage)
-                            <img src="{{ asset('storage/' . $service->serviceImage) }}" alt="{{ $service->serviceName }}" style="width: 100px; height: auto;">
+                            <img src="{{ asset('storage/' . $service->serviceImage) }}" alt="{{ $service->serviceName }}" style="width: 100%; height: auto;">
                         @else
                             No Image
                         @endif
