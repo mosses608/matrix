@@ -223,46 +223,47 @@
             </div>
         </div>
         <div class="page-wrapper">
+           
+                <div class="content container-fluid">
+              
+                   <center><h1>About Us</h1></center>
+                   <div class="centered-ajax0parag">
+                       <p><strong>Hous of Matrix</strong> is a Technological Organization which was established in November 2022 in Mbeya, Tanzani. e aimed at creating communityscience family with people who are passionate and depply engage with Technology and innovation with Electronics</p>
+                       <p><strong>House of Matrix</strong> mostly based on the Technology innovation and we offer the following services:</p>
+                       <p>
+                       <ul>
+                           <li><i class="fa fa-check"></i> Incubator Design</li><br>
+                           <li><i class="fa fa-check"></i> Circuit Design and Prototyping</li><br>
+                           <li><i class="fa fa-check"></i> Proteus and Matlab Simulation</li><br>
+                           <li><i class="fa fa-check"></i> Camera and Electrical Fence Installation</li><br>
+                           <li><i class="fa fa-check"></i> Software Design and Web Application Development</li><br>
+                           <li><i class="fa fa-check"></i> Electrical and Electronics Lab Srvices</li><br>
+                           <li><i class="fa fa-check"></i> Micro-controller programming such as Arduino, Esp and Pic</li><br>
+                           <li><i class="fa fa-check"></i> Computer Servicing and Windows Installation</li><br>
+                           <li><i class="fa fa-check"></i> Selling Electrical and Electronics Components</li><br>
+                           <li><i class="fa fa-check"></i> Mechanical Design of Materials</li><br>
+                           <li><i class="fa fa-check"></i> Solar Backup installation</li><br>
+                           <li><i class="fa fa-check"></i> Wiring, Electrical installation and Automation</li><br>
+                       </ul>
+                       </p>
+                       <p>We have our own workshops for Electrical, Electronics and Mechnical which offer all services based on the field</p>
+                       <p>Also we have Electrical and Electronics store which offer different Electronics Materials for Automation, Artificial Intelligence and Internet of Things. They include Micro-controller</p>
+                       <ul>
+                           <li><i class="fa fa-check"></i> Arduino Uno</li><br>
+                           <li><i class="fa fa-check"></i> Rasberry Pi</li><br>
+                           <li><i class="fa fa-check"></i> ESP Controller</li><br>
+                           <li><i class="fa fa-check"></i> PIC Controller</li><br>
+                           <li><i class="fa fa-check"></i> Different Sensor like Utrasonic</li><br>
+                           <li><i class="fa fa-check"></i> Wiring Material like cables, Bulb, Solar etc</li><br>
+                       </ul>
+                       <p>We as <strong>House of Matrix (HOM)</strong>, the community science family we belive that, in Technology nothing is impossible, lets do it.</p>
+                   </div>
+              
+           </div>   
+          
         </div>
     </div>
-    <script id="dashboard-template" type="text/x-handlebars-template">
-     <div class="content container-fluid">
-   
-        <center><h1>About Us</h1></center>
-        <div class="centered-ajax0parag">
-            <p><strong>Hous of Matrix</strong> is a Technological Organization which was established in November 2022 in Mbeya, Tanzani. e aimed at creating communityscience family with people who are passionate and depply engage with Technology and innovation with Electronics</p>
-            <p><strong>House of Matrix</strong> mostly based on the Technology innovation and we offer the following services:</p>
-            <p>
-            <ul>
-                <li><i class="fa fa-check"></i> Incubator Design</li><br>
-                <li><i class="fa fa-check"></i> Circuit Design and Prototyping</li><br>
-                <li><i class="fa fa-check"></i> Proteus and Matlab Simulation</li><br>
-                <li><i class="fa fa-check"></i> Camera and Electrical Fence Installation</li><br>
-                <li><i class="fa fa-check"></i> Software Design and Web Application Development</li><br>
-                <li><i class="fa fa-check"></i> Electrical and Electronics Lab Srvices</li><br>
-                <li><i class="fa fa-check"></i> Micro-controller programming such as Arduino, Esp and Pic</li><br>
-                <li><i class="fa fa-check"></i> Computer Servicing and Windows Installation</li><br>
-                <li><i class="fa fa-check"></i> Selling Electrical and Electronics Components</li><br>
-                <li><i class="fa fa-check"></i> Mechanical Design of Materials</li><br>
-                <li><i class="fa fa-check"></i> Solar Backup installation</li><br>
-                <li><i class="fa fa-check"></i> Wiring, Electrical installation and Automation</li><br>
-            </ul>
-            </p>
-            <p>We have our own workshops for Electrical, Electronics and Mechnical which offer all services based on the field</p>
-            <p>Also we have Electrical and Electronics store which offer different Electronics Materials for Automation, Artificial Intelligence and Internet of Things. They include Micro-controller</p>
-            <ul>
-                <li><i class="fa fa-check"></i> Arduino Uno</li><br>
-                <li><i class="fa fa-check"></i> Rasberry Pi</li><br>
-                <li><i class="fa fa-check"></i> ESP Controller</li><br>
-                <li><i class="fa fa-check"></i> PIC Controller</li><br>
-                <li><i class="fa fa-check"></i> Different Sensor like Utrasonic</li><br>
-                <li><i class="fa fa-check"></i> Wiring Material like cables, Bulb, Solar etc</li><br>
-            </ul>
-            <p>We as <strong>House of Matrix (HOM)</strong>, the community science family we belive that, in Technology nothing is impossible, lets do it.</p>
-        </div>
-   
-</div>   
-</script>
+    
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

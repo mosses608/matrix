@@ -525,7 +525,7 @@ select {
 .add-new-product-cloud {
     width: 80%;
     border-radius: 4px;
-    height: 540px;
+    height: auto;
     border: 1px solid rgb(202, 209, 216);
 }
 .add-new-product-cloud h1 {

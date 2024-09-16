@@ -12,6 +12,7 @@ class Service extends Model
     protected $fillable = [
         'serviceName',
         'serviceImage',
+        'serviceDESC',
     ];
 
     public function scopeFilter($query, array $filters)

@@ -350,6 +350,14 @@ button.next {
                             <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
 
                             <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6>
+
+                            <p 
+                                style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;" 
+                                onclick="showFullDescription(this)"
+                                data-full-description="{{ $item->itemDESC }}" 
+                               >
+                                click to read description
+                            </p>
                         </div>
 
                     </div>
@@ -448,6 +456,36 @@ button.next {
     // setInterval(nextSlide, 5000);
 </script>
 
+<script>
+    function showFullDescription(element) {
+        var fullDescription = element.getAttribute('data-full-description');
+        var popup = document.createElement('div');
+        
+        // Styling for the popup
+        popup.style.position = 'fixed';
+        popup.style.left = '50%';
+        popup.style.top = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.maxWidth = '80%';  // Adjust as needed
+        popup.style.width = 'auto';   // Allows width to adjust dynamically
+        popup.style.height = 'auto';  // Allows height to adjust dynamically
+        popup.style.padding = '20px';
+        popup.style.background = '#fff';
+        popup.style.border = '1px solid #ccc';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        popup.style.zIndex = '1000';
+        popup.style.overflow = 'auto'; // Ensure overflow is handled
+        
+        // Content and Close button
+        popup.innerHTML = `
+            <p style="margin: 0; word-wrap: break-word;">${fullDescription}</p>
+            <button onclick="this.parentElement.remove()" style="display: block; margin-top: 10px;">Close</button>
+        `;
+        
+        document.body.appendChild(popup);
+    }
+    </script>
+    
 </body>
 
 </html>

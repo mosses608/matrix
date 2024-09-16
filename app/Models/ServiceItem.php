@@ -13,6 +13,7 @@ class ServiceItem extends Model
         'service_id',
         'itemName',
         'itemPrice',
+        'itemDESC',
         'itemImage',
         'phoneNumber',
         'location',

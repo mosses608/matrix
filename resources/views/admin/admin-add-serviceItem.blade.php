@@ -8,6 +8,25 @@
             border-radius: 5px;
             margin-bottom: 15px;
         }
+
+        .text-area-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-end; /* Align items to the right */
+        margin-bottom: 10px; /* Adjust this for spacing */
+    }
+
+    textarea {
+        margin-bottom: 5px;
+    }
+
+    #charCount {
+        font-size: 12px;
+        color: #666;
+        align-self: flex-end; /* Align the text to the right */
+        margin-right: 20px;
+    }
 </style>
 <br><br><br>
 
@@ -46,12 +65,23 @@
             <input type="text" name="itemName" id="itemName" placeholder="Item Name"><br><br>
             <label for="">Item Price:</label>
             <input type="text" name="price" id="price" placeholder="item price"><br><br>
+            <label for="">Item Description:</label>
+            <div class="text-area-container">
+                <textarea name="itemDESC" id="itemDESC" placeholder="Item Description" maxlength="500" rows="4" cols="50"></textarea>
+                <p id="charCount">0/500 characters</p>
+            </div>
             <label for="">Phone No:</label>
             <input type="text" name="phoneNo" id="phoneNo" placeholder="Phone Number"><br><br>
             <label for="">Location:</label>
             <input type="text" name="location" id="location" placeholder="location"><br><br>
             <label for="">Item Image</label>
             <input type="file" name="itemImage[]" id="itemImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
+            @if ($errors->has('itemImage'))
+    <div class="alert alert-danger">
+        {{ $errors->first('itemImage') }}
+    </div>
+@endif
+
             <button type="submit">Add Item</button><br><br>
         </form>
 
@@ -68,4 +98,29 @@
     </div>
 </center>
 
+<script>
+    const serviceDESC = document.getElementById('itemDESC');
+    const charCount = document.getElementById('charCount');
+    const maxLength = 500;
+
+    serviceDESC.addEventListener('input', () => {
+        const typedChars = serviceDESC.value.length;
+        charCount.textContent = `${typedChars}/${maxLength} characters`;
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const fileInput = document.getElementById('itemImage');
+    
+        fileInput.addEventListener('change', function () {
+            const files = fileInput.files;
+            if (files.length > 4) {
+                alert('You can only select up to 4 images.');
+                fileInput.value = ''; // Clear the selected files
+            }
+        });
+    });
+    </script>
+    
 @endsection

@@ -8,6 +8,30 @@
             border-radius: 5px;
             margin-bottom: 15px;
         }
+
+        .char-count-container {
+        text-align: right;
+        margin-top: -20px; /* Adjust this value to control vertical spacing */
+    }
+
+    .text-area-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-end; /* Align items to the right */
+        margin-bottom: 10px; /* Adjust this for spacing */
+    }
+
+    textarea {
+        margin-bottom: 5px;
+    }
+
+    #charCount {
+        font-size: 12px;
+        color: #666;
+        align-self: flex-end; /* Align the text to the right */
+        margin-right: 20px;
+    }
 </style>
 <br><br><br>
 
@@ -43,6 +67,11 @@
         @endif
             <label for="">Service Name:</label>
             <input type="text" name="serviceName" id="serviceName" placeholder="Service Name"><br><br>
+            <label for="serviceDESC">Service Description:</label>
+            <div class="text-area-container">
+                <textarea name="serviceDESC" id="serviceDESC" placeholder="Service Description" maxlength="500" rows="4" cols="50"></textarea>
+                <p id="charCount">0/500 characters</p>
+            </div>
             <label for="">Service Image</label>
             <input type="file" name="serviceImage" id="serviceImage" multiple class="fileInput" style="border: none;" accept="image/*"><br><br>
             <button type="submit">Add New Service</button><br><br>
@@ -58,6 +87,19 @@
             }
             });
         </script>
+
+<script>
+    const serviceDESC = document.getElementById('serviceDESC');
+    const charCount = document.getElementById('charCount');
+    const maxLength = 500;
+
+    serviceDESC.addEventListener('input', () => {
+        const typedChars = serviceDESC.value.length;
+        charCount.textContent = `${typedChars}/${maxLength} characters`;
+    });
+</script>
+
+
     </div>
 </center>
 

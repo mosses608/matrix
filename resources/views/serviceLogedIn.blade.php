@@ -268,7 +268,6 @@
             <div class="row centered-ajax-component-loader" id="projects-container">
                 @foreach ($services as $service)
                 <div class="col-xl-6 d-flex" style="padding: 5px;">
-                    <a style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;" href="/loged-in-detailed-service/{{ $service->id }}">
                     <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
                     <div>
                         @if($service->serviceImage)
@@ -279,9 +278,18 @@
                     </div>
                         
                         <h6 style="margin-top: 10px;">Service Name: {{ $service->serviceName }}</h6>
+
+                        <p 
+                                style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer;" 
+                                onclick="showFullDescription(this)" 
+                                data-full-description="{{ $service->serviceDESC }}" 
+                                title="{{ strlen($service->serviceDESC) > 50 ? substr($service->serviceDESC, 0, 50) . '...' : $service->serviceDESC }}">
+                                {{ strlen($service->serviceDESC) > 50 ? substr($service->serviceDESC, 0, 50) . '...' : $service->serviceDESC }}
+                            </p>
+
+                            <a href="/loged-in-detailed-service/{{ $service->id }}">see more</a>
                   
                     </div>
-                </a>
                 </div>
             @endforeach
             </div>
@@ -338,6 +346,37 @@
     });
 </script>
 
+<script>
+    function showFullDescription(element) {
+        var fullDescription = element.getAttribute('data-full-description');
+        var popup = document.createElement('div');
+        
+        // Styling for the popup
+        popup.style.position = 'fixed';
+        popup.style.left = '50%';
+        popup.style.top = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.maxWidth = '80%';  // Adjust as needed
+        popup.style.width = 'auto';   // Allows width to adjust dynamically
+        popup.style.height = 'auto';  // Allows height to adjust dynamically
+        popup.style.padding = '20px';
+        popup.style.background = '#fff';
+        popup.style.border = '1px solid #ccc';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        popup.style.zIndex = '1000';
+        popup.style.overflow = 'auto'; // Ensure overflow is handled
+        
+        // Content and Close button
+        popup.innerHTML = `
+            <p style="margin: 0; word-wrap: break-word;">${fullDescription}</p>
+            <button onclick="this.parentElement.remove()" style="display: block; margin-top: 10px;">Close</button>
+        `;
+        
+        document.body.appendChild(popup);
+    }
+    </script>
+ 
+ 
 </body>
 
 </html>

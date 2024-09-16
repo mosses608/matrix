@@ -6,48 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>House | of | Matrix | Home | Page</title>
     <!--<link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">-->
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 
-        <style>
-            #load-more-container {
-    margin: 20px 0; /* Space between the projects container and the button */
-    text-align: center;
-}
+    <style>
+        #load-more-container {
+            margin: 20px 0;
+            /* Space between the projects container and the button */
+            text-align: center;
+        }
 
-#load-more {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff; /* Adjust color as needed */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        #load-more {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            /* Adjust color as needed */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-#load-more:hover {
-    background-color: #0056b3; /* Adjust hover color as needed */
-}
+        #load-more:hover {
+            background-color: #0056b3;
+            /* Adjust hover color as needed */
+        }
 
 
-/* Mobile view styling */
-@media (max-width: 767px) {
-    .content, .container-fluid {
-        margin-left: 0; /* Remove left margin */
-        width: 100%; /* Keep full width */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center items */
-    }
-}
-        </style>
+        /* Mobile view styling */
+        @media (max-width: 767px) {
+
+            .content,
+            .container-fluid {
+                margin-left: 0;
+                /* Remove left margin */
+                width: 100%;
+                /* Keep full width */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                /* Center items */
+            }
+        }
+    </style>
 
 </head>
 
@@ -56,8 +64,10 @@
         <div style="background-color: #17345b;" class="header">
             <div class="header-left">
                 <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
-                <a style="color: #fff" href="index.html" class="logo logo-small"><!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
-                        height="30">-->MTX</a>
+                <a style="color: #fff" href="index.html" class="logo logo-small">
+                    <!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
+                        height="30">-->MTX
+                </a>
                 <a href="javascript:void(0);" id="toggle_btn"><span
                         class="bar-icon"><span></span><span></span><span></span></span></a>
             </div>
@@ -163,7 +173,7 @@
                         </div>
                     </div>
                 </li>-->
-                <!--<li class="nav-item dropdown has-arrow main-drop">
+            <!--<li class="nav-item dropdown has-arrow main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><span class="user-img"><img
                                 src="assets/img/profile.jpg" alt=""><span
                                 class="status online"></span></span><span>Kavin Hansen</span></a>
@@ -190,7 +200,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div class="sidebar-contents">
-                    <div  id="sidebar-menu" class="sidebar-menu">
+                    <div id="sidebar-menu" class="sidebar-menu">
                         <div class="mobile-show">
                             <div class="offcanvas-menu">
                                 <div class="user-info align-center bg-theme text-center">
@@ -200,8 +210,8 @@
                                             
                                         </div>
                                     </a>-->
-                                    <img style="width: 100%; height: 100%;" src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar"
-                                    >
+                                    <img style="width: 100%; height: 100%;"
+                                        src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar">
                                 </div>
                             </div>
                             <div class="sidebar-input">
@@ -237,8 +247,7 @@
                                     <span>Log In</span></a>
                             </li>
                             <li>
-                                <a href=""><img src="assets/img/review.svg"
-                                        alt="sidebar_img"><span>Services</span></a>
+                                <a href=""><img src="assets/img/review.svg" alt="sidebar_img"><span>Services</span></a>
                             </li>
                             <!--<li>
                                 <a href=""><img src="assets/img/report.svg"
@@ -257,7 +266,7 @@
                                     <span>Profile</span></a>
                             </li>-->
                         </ul>
-                        
+
                     </div>
                 </div>
             </div>
@@ -265,52 +274,60 @@
         <div class="page-wrapper">
             <div class="content container-fluid">
 
-            <div class="row centered-ajax-component-loader" id="projects-container">
-                @foreach ($services as $service)
-                <div class="col-xl-6 d-flex" style="padding: 5px;">
-                    <a style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;" href="/detailed-service/{{ $service->id }}">
-                    <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
-                    <div>
-                        @if($service->serviceImage)
-                            <img src="{{ asset('storage/' . $service->serviceImage) }}" alt="{{ $service->serviceName }}" style="width: 100px; height: auto;">
-                        @else
-                            No Image
-                        @endif
-                    </div>
+                <div class="row centered-ajax-component-loader" id="projects-container">
+                    @foreach ($services as $service)
+                    <div class="col-xl-3 d-flex" style="padding: 5px;">
                         
-                        <h6 style="margin-top: 10px;">Service Name: {{ $service->serviceName }}</h6>
-                  
+                            <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    @if($service->serviceImage)
+                                        <img src="{{ asset('storage/' . $service->serviceImage) }}"
+                                            alt="{{ $service->serviceName }}" style="width: 100%; height: 300px;">
+                                    @else
+                                        No Image
+                                    @endif
+                                </div>
+
+                                <h6 style="margin-top: 10px;">Service Name: {{ $service->serviceName }}</h6>
+                                <p 
+                                style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer;" 
+                                onclick="showFullDescription(this)" 
+                                data-full-description="{{ $service->serviceDESC }}" 
+                                title="{{ strlen($service->serviceDESC) > 50 ? substr($service->serviceDESC, 0, 50) . '...' : $service->serviceDESC }}">
+                                {{ strlen($service->serviceDESC) > 50 ? substr($service->serviceDESC, 0, 50) . '...' : $service->serviceDESC }}
+                            </p>
+                            <a href="/detailed-service/{{ $service->id }}">see more</a>
+                            </div>
+                      
                     </div>
-                </a>
+                    @endforeach
                 </div>
-            @endforeach
-            </div>
 
             </div>
         </div>
     </div>
 
-    
-                </div>
-               
-            </div>
-        </div>
+
     </div>
 
-    
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/feather.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-<script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
-<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
-<script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
+    </div>
+    </div>
+    </div>
 
-<script>
-    document.getElementById('load-more')?.addEventListener('click', function() {
+
+    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('plugins/apexchart/chart-data.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dashboardTemplate.js') }}"></script>
+
+    <script>
+        document.getElementById('load-more')?.addEventListener('click', function() {
         const button = this;
         const nextPage = button.getAttribute('data-next-page');
         const totalPages = button.getAttribute('data-total-pages');
@@ -336,9 +353,39 @@
             })
             .catch(error => console.error('Error:', error));
     });
-</script>
+    </script>
 
-
+<script>
+    function showFullDescription(element) {
+        var fullDescription = element.getAttribute('data-full-description');
+        var popup = document.createElement('div');
+        
+        // Styling for the popup
+        popup.style.position = 'fixed';
+        popup.style.left = '50%';
+        popup.style.top = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.maxWidth = '80%';  // Adjust as needed
+        popup.style.width = 'auto';   // Allows width to adjust dynamically
+        popup.style.height = 'auto';  // Allows height to adjust dynamically
+        popup.style.padding = '20px';
+        popup.style.background = '#fff';
+        popup.style.border = '1px solid #ccc';
+        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        popup.style.zIndex = '1000';
+        popup.style.overflow = 'auto'; // Ensure overflow is handled
+        
+        // Content and Close button
+        popup.innerHTML = `
+            <p style="margin: 0; word-wrap: break-word;">${fullDescription}</p>
+            <button onclick="this.parentElement.remove()" style="display: block; margin-top: 10px;">Close</button>
+        `;
+        
+        document.body.appendChild(popup);
+    }
+    </script>
+    
+    
 </body>
 
 </html>

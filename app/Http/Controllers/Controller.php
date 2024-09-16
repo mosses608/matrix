@@ -46,7 +46,7 @@ class Controller extends BaseController
         //return view('services.index', ['services' => $services]);
 
         return view('services', [
-            'services' => Service::latest()->filter(request(['search']))->paginate(20),
+            'services' => Service::latest()->filter(request(['search']))->paginate(50),
         ]);
     }
 
@@ -120,9 +120,10 @@ class Controller extends BaseController
        $validatedData = $request->validate([
         'itemName' => 'required|string|max:255',
         'price' => 'required|string|max:255',
+        'itemDESC' => 'required',
         'phoneNo' => 'required|string|max:15',
         'location' => 'required|string|max:255',
-        'itemImage.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20000',
+        'itemImage.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:20000',
     ]);
 
     // Handle the file upload (if present)
@@ -130,6 +131,12 @@ class Controller extends BaseController
     if ($request->hasFile('itemImage')) {
         $imagePath = $request->file('itemImage')->store('service_images', 'public');
     }*/
+
+    // Custom validation for the number of files
+    $files = $request->file('itemImage');
+    if (count($files) > 4) {
+        return back()->withErrors(['itemImage' => 'You can only upload a maximum of 4 images.']);
+    }
 
     // Handle file uploads
     $imagePaths = [];
@@ -146,10 +153,12 @@ class Controller extends BaseController
         'service_id' => $request->input('serviceID'),
         'itemName' => $validatedData['itemName'],
         'itemPrice' => $validatedData['price'],
+        'itemDESC' => $validatedData['itemDESC'],
         'itemImage' => json_encode($imagePaths), // Store paths as JSON array
         'phoneNumber' => $validatedData['phoneNo'],
         'location' => $validatedData['location'],
     ]);
+    
 
      // Redirect back with success message
      return redirect()->back()->with('success', 'Service item added successfully!');
@@ -899,6 +908,7 @@ public function go_to_orderLogedIn()
         // Validate the request
         $validatedData = $request->validate([
             'serviceName' => 'required|string|max:255',
+            'serviceDESC' => 'required',
             'serviceImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:20000',
         ]);
     
@@ -913,6 +923,7 @@ public function go_to_orderLogedIn()
         // Create the service and save it to the database
         Service::create([
             'serviceName' => $validatedData['serviceName'],
+            'serviceDESC' => $validatedData['serviceDESC'],
             'serviceImage' => $imagePath ?? null,
         ]);
     
