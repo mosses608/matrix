@@ -95,6 +95,18 @@ button.prev {
 button.next {
     right: 10px;
 }
+
+.image-count {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 12px;
+        z-index: 1;
+    }
     </style>
 
 </head>
@@ -328,7 +340,10 @@ button.next {
                                     $images = json_decode($item->itemImage);
                                 @endphp
                                 <div class="image-slider">
-                                    <div class="slides">
+                                    <div class="image-count">
+                                        <span id="imageCounter">1/4</span>
+                                    </div>
+                                    <div class="slides" id="slides-{{ $item->id }}">
                                         @foreach($images as $image)
                                             <div class="slide">
                                                 <img src="{{ asset('storage/' . $image) }}" alt="{{ $item->itemName }}"
@@ -336,9 +351,10 @@ button.next {
                                             </div>
                                         @endforeach
                                     </div>
-                                    <button class="prev" onclick="prevSlide()">❮</button>
-                                    <button class="next" onclick="nextSlide()">❯</button>
+                                    <button class="prev" onclick="prevSlide({{ $item->id }}, {{ count($images) }})">❮</button>
+                                    <button class="next" onclick="nextSlide({{ $item->id }}, {{ count($images) }})">❯</button>
                                 </div>
+                                
                             @else
                                 No Image
                             @endif
@@ -427,7 +443,7 @@ button.next {
         alert("Phone number copied to clipboard!");
     }
 </script>
-
+<!--
 <script>
     let currentSlide = 0;
 
@@ -454,7 +470,7 @@ button.next {
 
     // Optionally, you can auto-slide
     // setInterval(nextSlide, 5000);
-</script>
+</script>-->
 
 <script>
     function showFullDescription(element) {
@@ -484,7 +500,76 @@ button.next {
         
         document.body.appendChild(popup);
     }
+    let currentSlide = 0;
+
+function showSlide(index) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slide').length;
+    
+    // Loop back to the first or last slide if necessary
+    if (index >= totalSlides) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+    } else {
+        currentSlide = index;
+    }
+
+    // Update slide position by applying transform
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update the image counter
+    document.getElementById('imageCounter').textContent = `${currentSlide + 1}/${totalSlides}`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Optionally, you can auto-slide
+// setInterval(nextSlide, 5000);
+
     </script>
+<!--
+    <script>
+        let currentSlides = {}; // To track the current slide of each item
+
+function showSlide(itemId, index, totalSlides) {
+    const slides = document.querySelector(`#projects-container #imageCounter-${itemId}`).closest('.slides');
+    if (!currentSlides[itemId]) {
+        currentSlides[itemId] = 0;
+    }
+    
+    if (index >= totalSlides) {
+        currentSlides[itemId] = 0;
+    } else if (index < 0) {
+        currentSlides[itemId] = totalSlides - 1;
+    } else {
+        currentSlides[itemId] = index;
+    }
+    
+    // Update the image counter
+    document.getElementById(`imageCounter-${itemId}`).textContent = `${currentSlides[itemId] + 1}/${totalSlides}`;
+    
+    // Apply slide transformation
+    slides.style.transform = `translateX(-${currentSlides[itemId] * 100}%)`;
+}
+
+function nextSlide(itemId, totalSlides) {
+    showSlide(itemId, currentSlides[itemId] + 1, totalSlides);
+}
+
+function prevSlide(itemId, totalSlides) {
+    showSlide(itemId, currentSlides[itemId] - 1, totalSlides);
+}
+
+    </script>-->
+
+    
     
 </body>
 
