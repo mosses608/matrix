@@ -79,9 +79,9 @@ button.prev, button.next {
     position: absolute;
     top: 50%;
     width: auto;
-    background-color: transparent;
+    background-color: #007bff;
     height: 40px;
-    color: green;
+    color: #fff;
     border: none;
     cursor: pointer;
     transform: translateY(-50%);
@@ -339,7 +339,7 @@ button.next {
                                 @php
                                     $images = json_decode($item->itemImage);
                                 @endphp
-                                <div class="image-slider">
+                                <div class="image-slider" id="slider-container">
                                     <div class="image-count">
                                         <span id="imageCounter">1/4</span>
                                     </div>
@@ -529,6 +529,8 @@ function nextSlide() {
 function prevSlide() {
     showSlide(currentSlide - 1);
 }
+
+
 
 // Optionally, you can auto-slide
 // setInterval(nextSlide, 5000);
