@@ -19,6 +19,9 @@
     <div class="mini-profile-link">
         <a href="/admin/my-profile"><i class="fa fa-angle-right"></i> View Profile</a>
     </div>
+    <div class="mini-profile-link">
+        <a href="/admin/my-profile"><i class="fa fa-angle-right"></i> Ordered Services</a>
+    </div>
     <div class="product-mgt-side" onclick="showHiddenProductLink()">
         <i class="fa fa-product-hunt"></i> <span><a href="#"></a>Manage Projects <i class="fa fa-angle-down"></i></span>
     </div>

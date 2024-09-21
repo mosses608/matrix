@@ -1,6 +1,7 @@
 @extends('admin.admin-layout')
 
 @section('content')
+
 <style>
      .alert-success {
             color: #007bff; /* Border color matching the background */
@@ -32,6 +33,22 @@
         align-self: flex-end; /* Align the text to the right */
         margin-right: 20px;
     }
+
+    /* Mobile view styling */
+    @media (max-width: 767px) {
+
+.content,
+.container-fluid {
+    margin-left: 0;
+    /* Remove left margin */
+    width: 100%;
+    /* Keep full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center items */
+}
+}
 </style>
 <br><br><br>
 

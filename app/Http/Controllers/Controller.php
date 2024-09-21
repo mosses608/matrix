@@ -11,6 +11,7 @@ use App\Models\ServiceItem;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\ServiceItemOrderd;
 use Faker\Provider\Lorem;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -30,7 +31,7 @@ class Controller extends BaseController
     public function welcome()
     {
         return view('welcome', [
-            'projects' => Project::latest()->filter(request(['search']))->paginate(4),
+            'projects' => Project::latest()->filter(request(['search']))->paginate(6),
             'notifications' => Notification::latest()->get(),
         ]);
 
@@ -104,7 +105,7 @@ class Controller extends BaseController
 
     public function admingetAllServices(){
         return view('admin.admin-get-all-services', [
-            'adminServices' => Service::latest()->filter(request(['search']))->paginate(4),
+            'adminServices' => Service::latest()->filter(request(['search']))->paginate(50),
         ]);
     }
 
@@ -168,7 +169,7 @@ class Controller extends BaseController
     public function mainpageSignedIn()
     {
         return view('mainpage', [
-            'projects' => Project::latest()->filter(request(['search']))->paginate(4),
+            'projects' => Project::latest()->filter(request(['search']))->paginate(6),
             'notifications' => Notification::latest()->get(),
         ]);
 
@@ -496,27 +497,6 @@ class Controller extends BaseController
         return view('admin.add-project');
     }
 
-    // public function store_projects(Request $request){
-    //     $projectDetails = $request->validate([
-    //         'project_name' => 'required|string|max:255',
-    //         'project_documentation' => 'required|file|mimes:pdf',
-    //         'project_video' => 'nullable|file|mimetypes:video/mp4,video/x-msvideo,video/x-ms-wmv,video/avi',
-    //     ]);
-
-    //     if ($request->hasFile('project_documentation')) {
-    //         $projectDetails['project_documentation'] = $request->file('project_documentation')->store('documentation', 'public');
-    //     }
-
-    //     if ($request->hasFile('project_video')) {
-    //         $projectDetails['project_video'] = $request->file('project_video')->store('project_vid', 'public');
-    //     }
-
-    //     //Project::create($projectDetails);
-
-    //     dd($request->all());
-    //     //return redirect()->back()->with('project_posted','Project added successfully!');
-    // }
-
     public function load_to_news()
     {
         return view('admin.news');
@@ -614,42 +594,6 @@ class Controller extends BaseController
     return redirect('/mainpage')->with('login_success_msg', 'Account created successfully');
 
 }
-
-
-
-//     public function store_projects(Request $request)
-// {
-//     \Log::info('Request received', $request->all());
-
-//     $projectDetails = $request->validate([
-//         'project_name' => 'required',
-//         'project_video' => 'required|file|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:20000',
-//         'project_picture' => 'required|file|mimetypes:application/pdf|max:10000',
-//     ]);
-
-//     \Log::info('Validation passed');
-
-//     if ($request->hasFile('project_picture')) {
-//         \Log::info('Project picture detected');
-//         $projectDetails['project_picture'] = $request->file('project_picture')->store('pictures', 'public');
-//         \Log::info('Project picture stored at: ' . $projectDetails['project_picture']);
-//     } else {
-//         \Log::info('No project picture detected');
-//     }
-
-//     if ($request->hasFile('project_video')) {
-//         \Log::info('Project video detected');
-//         $projectDetails['project_video'] = $request->file('project_video')->store('videos', 'public');
-//         \Log::info('Project video stored at: ' . $projectDetails['project_video']);
-//     } else {
-//         \Log::info('No project video detected');
-//     }
-
-//     Project::create($projectDetails);
-//     \Log::info('Project created successfully');
-
-//     return redirect()->back()->with('project_posted', 'Project added successfully!');
-// }
 
 
     public function store_projects(Request $request)
@@ -931,7 +875,37 @@ public function go_to_orderLogedIn()
         return redirect()->back()->with('success', 'Service added successfully!');
     }
 
+    public function purchaseServiceItem(Request $request){
 
+       // Validate the form inputs
+       $request->validate([
+        'itemName' => 'required|string',
+        'serviceID' => 'required|integer',
+        'itemPrice' => 'required|string',
+        'name' => 'required|string',
+        'contact' => 'required|string',
+        'customerLocation' => 'required|string',
+    ]);
+
+        // Save the data into the database
+        ServiceItemOrderd::create([
+            'serviceID' => $request->input('serviceID'),
+            'itemName' => $request->input('itemName'),
+            'customerName' => $request->input('name'),
+            'location' => $request->input('customerLocation'),
+            'phoneNo' => $request->input('contact'),
+            'itemPrice' => $request->input('itemPrice'),
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('purchase_success', 'You purchased this service item successfully, wait a few minutes for our call.');
+    }
+
+    public function getAllOrderedServices(){
+        return view('admin.admin-ordered-services', [
+            'orderedServices' => ServiceItemOrderd::latest()->filter(['search'])->paginate(6),
+        ]);
+    }
     
 }
 

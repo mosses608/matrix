@@ -25,6 +25,11 @@
 
         <form action="/projects" method="POST" class="add-new-product-cloud" enctype="multipart/form-data">
             @csrf
+            @if (session('project_posted'))
+            <div class="alert alert-success">
+                {{ session('project_posted') }}
+            </div>
+        @endif
             <h1>Add New Project Post</h1><br>
             <label for="">Project Name:</label>
             <input type="text" name="project_name" id="project_name" placeholder="Project Name"><br><br>
@@ -34,7 +39,6 @@
             <input type="file" name="project_picture" id="project_documentation" class="fileInput" style="border: none;" accept="application/pdf"><br><br>
             <button type="submit">Post Project</button><br><br>
         </form>
-
 
         <script>
             document.querSelectorAll(".fileInput input").addEventListener('change', function() {

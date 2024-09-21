@@ -167,3 +167,7 @@ Route::get('/admin-add-service-item/{id}/{serviceName}', [Controller::class, 'ad
 Route::post('/admin-store-service-item', [Controller::class, 'adminStoreServiceItem']);
 
 Route::get('/loged-in-services', [Controller::class, 'getAllServicesLogedIn']);
+
+Route::post('/purchase-service-item', [Controller::class, 'purchaseServiceItem']);
+
+Route::get('/get-all-ordered-service-items', [Controller::class, 'getAllOrderedServices']);

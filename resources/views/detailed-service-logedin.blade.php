@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     <!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.min.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+   <script src="assets/js/html5shiv.min.js"></script>
+   <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
 
     <style>
         #load-more-container {
@@ -57,44 +57,116 @@
         }
 
         .image-slider {
-    position: relative;
-    width: 100%;
-    max-width: 600px; /* Adjust as needed */
-    height: auto;
-    margin: auto;
-    overflow: hidden;
-}
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            /* Adjust as needed */
+            height: auto;
+            margin: auto;
+            overflow: hidden;
+        }
 
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
 
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
 
-button.prev, button.next {
-    position: absolute;
-    top: 50%;
-    width: auto;
-    background-color: transparent;
-    height: 40px;
-    color: green;
-    border: none;
-    cursor: pointer;
-    transform: translateY(-50%);
-    z-index: 1000;
-}
+        button.prev,
+        button.next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            background-color: transparent;
+            height: 40px;
+            color: green;
+            border: none;
+            cursor: pointer;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
 
-button.prev {
-    left: 10px;
-}
+        button.prev {
+            left: 10px;
+        }
 
-button.next {
-    right: 10px;
-}
+        button.next {
+            right: 10px;
+        }
+
+
+        /* Mobile view styling */
+        @media (max-width: 767px) {
+
+            .content,
+            .container-fluid {
+                margin-left: 0;
+                /* Remove left margin */
+                width: 100%;
+                /* Keep full width */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                /* Center items */
+            }
+        }
+
+        .content {
+            text-align: center;
+        }
+
+
+        /* Popup styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999; /* Ensure it appears above all other elements */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-btn {
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #ff3c3c;
+        }
+
+        .open-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .open-btn:hover {
+            background-color: #006994;
+        }
     </style>
 
 </head>
@@ -103,7 +175,8 @@ button.next {
     <div class="main-wrapper">
         <div style="background-color: #17345b;" class="header">
             <div class="header-left">
-                <a href="index.html" class="logo"><img src="{{asset('assets/img/matrix-logo.png')}}" alt="Logo"></a>
+                <a href="index.html" class="logo"><img src="{{ asset('assets/img/matrix-logo.png') }}"
+                        alt="Logo"></a>
                 <a style="color: #fff" href="index.html" class="logo logo-small">
                     <!--<img src="assets/img/logo-small.png" alt="Logo" width="30"
                         height="30">-->MTX
@@ -251,7 +324,7 @@ button.next {
                                         </div>
                                     </a>-->
                                     <img style="width: 100%; height: 100%;"
-                                        src="{{asset('assets/img/matrix-logo.png')}}" alt="user avatar">
+                                        src="{{ asset('assets/img/matrix-logo.png') }}" alt="user avatar">
                                 </div>
                             </div>
                             <div class="sidebar-input">
@@ -271,7 +344,8 @@ button.next {
                                     <span>Home</span></a>
                             </li>
                             <li>
-                                <a href="/order-components"><img src="assets/img/employee.svg" alt="sidebar_img"><span>
+                                <a href="/order-components"><img src="assets/img/employee.svg"
+                                        alt="sidebar_img"><span>
                                         Order Components</span></a>
                             </li>
                             <li>
@@ -314,55 +388,126 @@ button.next {
         </div>
         <div class="page-wrapper">
             <div class="content container-fluid">
-                @if($serviceItems->isEmpty())
-                <h6>No items added</h6>
-                @else
-                <div class="row centered-ajax-component-loader" id="projects-container">
-                    @foreach ($serviceItems as $item)
-                    <div class="col-xl-3 d-flex" style="padding: 5px;">
 
-                        <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
-                            <div style="text-align: center;">
-                                @if($item->itemImage)
-                                @php
-                                    $images = json_decode($item->itemImage);
-                                @endphp
-                                <div class="image-slider">
-                                    <div class="slides">
-                                        @foreach($images as $image)
-                                            <div class="slide">
-                                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $item->itemName }}"
-                                                     style="width: 100%; height: auto;">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <button class="prev" onclick="prevSlide()">❮</button>
-                                    <button class="next" onclick="nextSlide()">❯</button>
-                                </div>
-                            @else
-                                No Image
-                            @endif
-                            </div>
-                            <h6 style="margin-top: 10px;">Item Name: {{ $item->itemName }}</h6>
-
-                            <h6 style="margin-top: 10px;">Item Price: {{ $item->itemPrice }}</h6>
-
-                            <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
-
-                            <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6>
-                           
-                            <p 
-                                style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;" 
-                                onclick="showFullDescription(this)"
-                                data-full-description="{{ $item->itemDESC }}" 
-                               >
-                                click to read description
-                            </p>
-                        </div>
-
+                <!-- Display flash messages -->
+                @if (session('purchase_success'))
+                    <div class="alert alert-success">
+                        {{ session('purchase_success') }}
                     </div>
-                    @endforeach
-                </div>
+                @endif
+
+                @if ($serviceItems->isEmpty())
+                    <h6>No items added</h6>
+                @else
+                    <div class="row centered-ajax-component-loader" id="projects-container">
+                        @foreach ($serviceItems as $item)
+                            <div class="col-xl-3 d-flex" style="padding: 5px;">
+
+                                <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                                    <div style="text-align: center;">
+                                        @if ($item->itemImage)
+                                            @php
+                                                $images = json_decode($item->itemImage);
+                                            @endphp
+                                            <div class="image-slider">
+                                                <div class="slides">
+                                                    @foreach ($images as $image)
+                                                        <div class="slide">
+                                                            <img src="{{ asset('storage/' . $image) }}"
+                                                                alt="{{ $item->itemName }}"
+                                                                style="width: 100%; height: auto;">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <button class="prev" onclick="prevSlide()">❮</button>
+                                                <button class="next" onclick="nextSlide()">❯</button>
+                                            </div>
+                                        @else
+                                            No Image
+                                        @endif
+                                    </div>
+                                    <h6 style="margin-top: 10px;">Item Name: {{ $item->itemName }}</h6>
+
+                                    <h6 style="margin-top: 10px;">Item Price: {{ $item->itemPrice }}</h6>
+
+                                    <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
+
+                                    {{-- <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6> --}}
+
+                                    <p style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;"
+                                        onclick="showFullDescription(this)"
+                                        data-full-description="{{ $item->itemDESC }}">
+                                        click to read description
+                                    </p>
+
+                                    <div class="content">
+                                        <!--<h1>Welcome to the Page</h1>
+                                <p>This is the main page content.</p>-->
+                                        <button class="open-btn" onclick="openPopup()">purchase now</button>
+                                    </div>
+
+                                    <!-- Popup Overlay -->
+                                    <!--Pop up -->
+                                    <div class="popup-overlay" id="popup-overlay">
+                                        <div class="popup">
+                                            <!-- Close Button -->
+                                            <button class="close-btn" onclick="closePopup()">Close</button>
+                                            <p>If your details are not displayed, fill the form below</p>
+
+                                            <!-- Order Form -->
+                                            <form action="/purchase-service-item" method="POST" class="order-form">
+                                                @csrf
+                                                @auth('account')
+                                                    <!-- Name Field -->
+                                                    <input type="hidden" name="itemName" id="" value="{{ $item->itemName }}">
+                                                    <input type="hidden" name="serviceID" id="" value="{{ $item->service_id }}">
+                                                    <input type="hidden" name="itemPrice" id="" value="{{ $item->itemPrice }}">
+                                                    <div class="form-group">
+                                                        <label for="">Customer Name:</label>
+                                                        <input style="width: : 100%; height: 40px;" type="text"
+                                                            name="name" id=""
+                                                            value="{{ Auth::guard('account')->user()->name }}">
+                                                        @error('name')
+                                                            <span>Name is required!</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <!-- Phone Number Field -->
+                                                    <div class="form-group">
+                                                        <input style="width: : 100%; height: 40px;" type="text"
+                                                            name="contact" id=""
+                                                            value="{{ Auth::guard('account')->user()->username }}">
+
+                                                            <input style="width: : 100%; height: 40px; margin-top: 10px;" type="text"
+                                                            name="customerLocation" id="" placeholder="enter your location" required>
+
+                                                        @error('contact')
+                                                            <span>Phone number is required!</span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <!-- Address Field
+                            <div class="form-group">
+                                <input style="width: 100%; height: 40px;" type="text" id="address" name="address" placeholder="Enter your address" required />
+                            </div>-->
+
+                                                    <!-- Submit Button -->
+                                                    <div style="margin-top: 10px;">
+                                                        <button type="submit" class="submit-btn"
+                                                            style="background-color: #17345b; color: white; border-radius: 5px;">purchase</button>
+                                                    </div>
+                                                @else
+                                                    <p>You need to login first! <a href="/login">Go To Login</a></p>
+                                                @endauth
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        @endforeach
+                    </div>
                 @endif
             </div>
         </div>
@@ -382,111 +527,121 @@ button.next {
 
     <script>
         document.getElementById('load-more')?.addEventListener('click', function() {
-        const button = this;
-        const nextPage = button.getAttribute('data-next-page');
-        const totalPages = button.getAttribute('data-total-pages');
+            const button = this;
+            const nextPage = button.getAttribute('data-next-page');
+            const totalPages = button.getAttribute('data-total-pages');
 
-        if (parseInt(nextPage) > parseInt(totalPages)) {
-            button.style.display = 'none'; // Hide button if no more pages
-            return;
-        }
+            if (parseInt(nextPage) > parseInt(totalPages)) {
+                button.style.display = 'none'; // Hide button if no more pages
+                return;
+            }
 
-        fetch(`?page=${nextPage}`)
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newProjects = doc.querySelector('#projects-container').innerHTML;
-                document.querySelector('#projects-container').innerHTML += newProjects;
+            fetch(`?page=${nextPage}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newProjects = doc.querySelector('#projects-container').innerHTML;
+                    document.querySelector('#projects-container').innerHTML += newProjects;
 
-                if (!doc.querySelector('#load-more')) {
-                    button.style.display = 'none'; // Hide button if no more pages
-                } else {
-                    button.setAttribute('data-next-page', parseInt(nextPage) + 1);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    });
+                    if (!doc.querySelector('#load-more')) {
+                        button.style.display = 'none'; // Hide button if no more pages
+                    } else {
+                        button.setAttribute('data-next-page', parseInt(nextPage) + 1);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
     </script>
 
-<script>
-    function copyToClipboard(text) {
-        // Create a temporary input element
-        var tempInput = document.createElement("input");
-        // Set its value to the text to be copied
-        tempInput.value = text;
-        // Append it to the body
-        document.body.appendChild(tempInput);
-        // Select the text
-        tempInput.select();
-        // Execute the copy command
-        document.execCommand("copy");
-        // Remove the temporary input element
-        document.body.removeChild(tempInput);
-        // Optionally, alert the user that the text was copied
-        alert("Phone number copied to clipboard!");
-    }
-</script>
-
-<script>
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        const slides = document.querySelector('.slides');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        if (index >= totalSlides) {
-            currentSlide = 0;
-        } else if (index < 0) {
-            currentSlide = totalSlides - 1;
-        } else {
-            currentSlide = index;
+    <script>
+        function copyToClipboard(text) {
+            // Create a temporary input element
+            var tempInput = document.createElement("input");
+            // Set its value to the text to be copied
+            tempInput.value = text;
+            // Append it to the body
+            document.body.appendChild(tempInput);
+            // Select the text
+            tempInput.select();
+            // Execute the copy command
+            document.execCommand("copy");
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+            // Optionally, alert the user that the text was copied
+            alert("Phone number copied to clipboard!");
         }
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
+    </script>
 
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
+    <script>
+        let currentSlide = 0;
 
-    function prevSlide() {
-        showSlide(currentSlide - 1);
-    }
+        function showSlide(index) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
 
-    // Optionally, you can auto-slide
-    // setInterval(nextSlide, 5000);
-</script>
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
 
-<script>
-    function showFullDescription(element) {
-        var fullDescription = element.getAttribute('data-full-description');
-        var popup = document.createElement('div');
-        
-        // Styling for the popup
-        popup.style.position = 'fixed';
-        popup.style.left = '50%';
-        popup.style.top = '50%';
-        popup.style.transform = 'translate(-50%, -50%)';
-        popup.style.maxWidth = '80%';  // Adjust as needed
-        popup.style.width = 'auto';   // Allows width to adjust dynamically
-        popup.style.height = 'auto';  // Allows height to adjust dynamically
-        popup.style.padding = '20px';
-        popup.style.background = '#fff';
-        popup.style.border = '1px solid #ccc';
-        popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-        popup.style.zIndex = '1000';
-        popup.style.overflow = 'auto'; // Ensure overflow is handled
-        
-        // Content and Close button
-        popup.innerHTML = `
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Optionally, you can auto-slide
+        // setInterval(nextSlide, 5000);
+    </script>
+
+    <script>
+        function showFullDescription(element) {
+            var fullDescription = element.getAttribute('data-full-description');
+            var popup = document.createElement('div');
+
+            // Styling for the popup
+            popup.style.position = 'fixed';
+            popup.style.left = '50%';
+            popup.style.top = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.maxWidth = '80%'; // Adjust as needed
+            popup.style.width = 'auto'; // Allows width to adjust dynamically
+            popup.style.height = 'auto'; // Allows height to adjust dynamically
+            popup.style.padding = '20px';
+            popup.style.background = '#fff';
+            popup.style.border = '1px solid #ccc';
+            popup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            popup.style.zIndex = '1000';
+            popup.style.overflow = 'auto'; // Ensure overflow is handled
+
+            // Content and Close button
+            popup.innerHTML = `
             <p style="margin: 0; word-wrap: break-word;">${fullDescription}</p>
             <button onclick="this.parentElement.remove()" style="display: block; margin-top: 10px;">Close</button>
         `;
-        
-        document.body.appendChild(popup);
-    }
-    </script>
-    
 
+            document.body.appendChild(popup);
+        }
+    </script>
+
+    <script>
+        // Function to show the popup
+        function openPopup() {
+            document.getElementById('popup-overlay').style.display = 'flex';
+        }
+
+        // Function to hide the popup
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>

@@ -41,21 +41,68 @@
 
 
         /* Mobile view styling */
-        @media (max-width: 767px) {
+@media (max-width: 767px) {
+    .content, .container-fluid {
+        margin-left: 0; /* Remove left margin */
+        width: 100%; /* Keep full width */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items */
+    }
+}
 
-            .content,
-            .container-fluid {
-                margin-left: 0;
-                /* Remove left margin */
-                width: 100%;
-                /* Keep full width */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                /* Center items */
-            }
+.content {
+            text-align: center;
         }
 
+        
+/* Popup styles */
+.popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999; /* Ensure it appears above all other elements */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-btn {
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #ff3c3c;
+        }
+
+        .open-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .open-btn:hover {
+            background-color: #006994;
+        }
         .image-slider {
     position: relative;
     width: 100%;
@@ -325,10 +372,29 @@ button.next {
             </div>
         </div>
         <div class="page-wrapper">
+                              <!-- Popup Overlay -->
+                              <div class="popup-overlay" id="popup-overlay">
+                                <div class="popup">
+                                    <h6>You need to login first!</h6>
+                                    <p>to get this service.</p>
+                                    <button class="close-btn" onclick="closePopup()">Close</button>
+                                    <div style="margin-top: 5px;">
+                                        <a href="/login">Go To Login</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
             <div class="content container-fluid">
+
+                       
+          
                 @if($serviceItems->isEmpty())
                 <h6>No items added</h6>
                 @else
+
+         
+
                 <div class="row centered-ajax-component-loader" id="projects-container">
                     @foreach ($serviceItems as $item)
                     <div class="col-xl-3 d-flex" style="padding: 5px;">
@@ -365,7 +431,7 @@ button.next {
 
                             <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
 
-                            <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6>
+                            <!--<h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6>-->
 
                             <p 
                                 style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;" 
@@ -374,6 +440,13 @@ button.next {
                                >
                                 click to read description
                             </p>
+
+                            <div class="content">
+                                <!--<h1>Welcome to the Page</h1>
+                                <p>This is the main page content.</p>-->
+                                <button class="open-btn" onclick="openPopup()">purchase now</button>
+                            </div>
+
                         </div>
 
                     </div>
@@ -536,6 +609,18 @@ function prevSlide() {
 // setInterval(nextSlide, 5000);
 
     </script>
+
+<script>
+    // Function to show the popup
+     function openPopup() {
+         document.getElementById('popup-overlay').style.display = 'flex';
+     }
+ 
+     // Function to hide the popup
+     function closePopup() {
+         document.getElementById('popup-overlay').style.display = 'none';
+     }
+ </script>
 <!--
     <script>
         let currentSlides = {}; // To track the current slide of each item

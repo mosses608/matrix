@@ -8,9 +8,7 @@
     <div class="profile-view-side" onclick="showHiddenProfileMenu()">
         <i class="fa fa-user"></i> <span><a href="#">My Profile <i class="fa fa-angle-down"></i></a></span>
     </div>
-    <div class="mini-profile-link">
-        <a href="/admin/my-profile"><i class="fa fa-angle-right"></i> View Profile</a>
-    </div>
+   
     <div class="product-mgt-side" onclick="showHiddenProductLink()">
         <i class="fa fa-product-hunt"></i> <span><a href="#"></a>Manage Projects <i class="fa fa-angle-down"></i></span>
     </div>
@@ -21,6 +19,7 @@
         <a href="/admin/view-components"><i class="fa fa-angle-right"></i> View Components</a>
         <a href="/admin/get-services-page"><i class="fa fa-angle-right"></i> Add Service</a>
         <a href="/admin-get-all-services"><i class="fa fa-angle-right"></i> View All Services</a>
+        <a href="/get-all-ordered-service-items"><i class="fa fa-angle-right"></i> Ordered Services</a>
     </div>
     <div class="feedbacks-view-side" onclick="showHiddenFeedback()">
         <i class="fa fa-comments"></i> <span><a href="#">News & Feedbacks <i class="fa fa-angle-down"></i></a></span>
