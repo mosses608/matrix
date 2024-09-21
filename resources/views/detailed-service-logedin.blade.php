@@ -399,115 +399,103 @@
                 @if ($serviceItems->isEmpty())
                     <h6>No items added</h6>
                 @else
-                    <div class="row centered-ajax-component-loader" id="projects-container">
-                        @foreach ($serviceItems as $item)
-                            <div class="col-xl-3 d-flex" style="padding: 5px;">
-
-                                <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
-                                    <div style="text-align: center;">
-                                        @if ($item->itemImage)
-                                            @php
-                                                $images = json_decode($item->itemImage);
-                                            @endphp
-                                            <div class="image-slider">
-                                                <div class="slides">
-                                                    @foreach ($images as $image)
-                                                        <div class="slide">
-                                                            <img src="{{ asset('storage/' . $image) }}"
-                                                                alt="{{ $item->itemName }}"
-                                                                style="width: 100%; height: auto;">
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <button class="prev" onclick="prevSlide()">❮</button>
-                                                <button class="next" onclick="nextSlide()">❯</button>
+                <div class="row centered-ajax-component-loader" id="projects-container">
+                    @foreach ($serviceItems as $item)
+                        <div class="col-xl-3 d-flex" style="padding: 5px;">
+                
+                            <div style="background-color: hsl(0, 0%, 100%); width: 100%; padding: 10px;">
+                                <div style="text-align: center;">
+                                    @if ($item->itemImage)
+                                        @php
+                                            $images = json_decode($item->itemImage);
+                                        @endphp
+                                        <div class="image-slider">
+                                            <div class="slides">
+                                                @foreach ($images as $image)
+                                                    <div class="slide">
+                                                        <img src="{{ asset('storage/' . $image) }}"
+                                                            alt="{{ $item->itemName }}"
+                                                            style="width: 100%; height: auto;">
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                        @else
-                                            No Image
-                                        @endif
-                                    </div>
-                                    <h6 style="margin-top: 10px;">Item Name: {{ $item->itemName }}</h6>
-
-                                    <h6 style="margin-top: 10px;">Item Price: {{ $item->itemPrice }}</h6>
-
-                                    <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
-
-                                    {{-- <h6 style="margin-top: 10px;">Location: {{ $item->phoneNumber }} <a href="#" onclick="copyToClipboard('{{ $item->phoneNumber }}')">copy</a> </h6> --}}
-
-                                    <p style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;"
-                                        onclick="showFullDescription(this)"
-                                        data-full-description="{{ $item->itemDESC }}">
-                                        click to read description
-                                    </p>
-
-                                    <div class="content">
-                                        <!--<h1>Welcome to the Page</h1>
-                                <p>This is the main page content.</p>-->
-                                        <button class="open-btn" onclick="openPopup()">purchase now</button>
-                                    </div>
-
-                                    <!-- Popup Overlay -->
-                                    <!--Pop up -->
-                                    <div class="popup-overlay" id="popup-overlay">
-                                        <div class="popup">
-                                            <!-- Close Button -->
-                                            <button class="close-btn" onclick="closePopup()">Close</button>
-                                            <p>If your details are not displayed, fill the form below</p>
-
-                                            <!-- Order Form -->
-                                            <form action="/purchase-service-item" method="POST" class="order-form">
-                                                @csrf
-                                                @auth('account')
-                                                    <!-- Name Field -->
-                                                    <input type="hidden" name="itemName" id="" value="{{ $item->itemName }}">
-                                                    <input type="hidden" name="serviceID" id="" value="{{ $item->service_id }}">
-                                                    <input type="hidden" name="itemPrice" id="" value="{{ $item->itemPrice }}">
-                                                    <div class="form-group">
-                                                        <label for="">Customer Name:</label>
-                                                        <input style="width: : 100%; height: 40px;" type="text"
-                                                            name="name" id=""
-                                                            value="{{ Auth::guard('account')->user()->name }}">
-                                                        @error('name')
-                                                            <span>Name is required!</span>
-                                                        @enderror
-                                                    </div>
-
-                                                    <!-- Phone Number Field -->
-                                                    <div class="form-group">
-                                                        <input style="width: : 100%; height: 40px;" type="text"
-                                                            name="contact" id=""
-                                                            value="{{ Auth::guard('account')->user()->username }}">
-
-                                                            <input style="width: : 100%; height: 40px; margin-top: 10px;" type="text"
-                                                            name="customerLocation" id="" placeholder="enter your location" required>
-
-                                                        @error('contact')
-                                                            <span>Phone number is required!</span>
-                                                        @enderror
-                                                    </div>
-
-                                                    <!-- Address Field
-                            <div class="form-group">
-                                <input style="width: 100%; height: 40px;" type="text" id="address" name="address" placeholder="Enter your address" required />
-                            </div>-->
-
-                                                    <!-- Submit Button -->
-                                                    <div style="margin-top: 10px;">
-                                                        <button type="submit" class="submit-btn"
-                                                            style="background-color: #17345b; color: white; border-radius: 5px;">purchase</button>
-                                                    </div>
-                                                @else
-                                                    <p>You need to login first! <a href="/login">Go To Login</a></p>
-                                                @endauth
-                                            </form>
-
+                                            <button class="prev" onclick="prevSlide()">❮</button>
+                                            <button class="next" onclick="nextSlide()">❯</button>
                                         </div>
-                                    </div>
+                                    @else
+                                        No Image
+                                    @endif
                                 </div>
-
+                                <h6 style="margin-top: 10px;">Item Name: {{ $item->itemName }}</h6>
+                
+                                <h6 style="margin-top: 10px;">Item Price: {{ $item->itemPrice }}</h6>
+                
+                                <h6 style="margin-top: 10px;">Location: {{ $item->location }}</h6>
+                
+                                <p style="width: 100%; word-wrap: break-word; word-break: break-word; cursor: pointer; margin-top: 10px;"
+                                    onclick="showFullDescription(this)"
+                                    data-full-description="{{ $item->itemDESC }}">
+                                    click to read description
+                                </p>
+                
+                                <div class="content">
+                                    <button class="open-btn"
+                                        onclick="openPopup('{{ $item->itemName }}', '{{ $item->service_id }}', '{{ $item->itemPrice }}', '{{ $item->location }}')">
+                                        purchase now
+                                    </button>
+                                </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
+                </div>
+                
+                <!-- Popup Overlay -->
+                <div class="popup-overlay" id="popup-overlay">
+                    <div class="popup">
+                        <!-- Close Button -->
+                        <button class="close-btn" onclick="closePopup()">Close</button>
+                        <p>If your details are not displayed, fill the form below</p>
+                
+                        <!-- Order Form -->
+                        <form action="/purchase-service-item" method="POST" class="order-form">
+                            @csrf
+                            @auth('account')
+                                <!-- Hidden Fields for Item Details -->
+                                <input type="hidden" name="itemName" id="popup-itemName">
+                                <input type="hidden" name="serviceID" id="popup-serviceID">
+                                <input type="hidden" name="itemPrice" id="popup-itemPrice">
+                                <input type="hidden" name="location" id="popup-location">
+                
+                                <!-- Customer Details -->
+                                <div class="form-group">
+                                    <label for="">Customer Name:</label>
+                                    <input style="width: 100%; height: 40px;" type="text"
+                                        name="name"
+                                        value="{{ Auth::guard('account')->user()->name }}">
+                                </div>
+                
+                                <div class="form-group">
+                                    <input style="width: 100%; height: 40px;" type="text"
+                                        name="contact"
+                                        value="{{ Auth::guard('account')->user()->username }}">
+                
+                                    <input style="width: 100%; height: 40px; margin-top: 10px;" type="text"
+                                        name="customerLocation" id="customerLocation" placeholder="enter your location" required>
+                                </div>
+                
+                                <!-- Submit Button -->
+                                <div style="margin-top: 10px;">
+                                    <button type="submit" class="submit-btn"
+                                        style="background-color: #17345b; color: white; border-radius: 5px;">purchase
+                                    </button>
+                                </div>
+                            @else
+                                <p>You need to login first! <a href="/login">Go To Login</a></p>
+                            @endauth
+                        </form>
                     </div>
+                </div>
+                
                 @endif
             </div>
         </div>
@@ -633,14 +621,32 @@
 
     <script>
         // Function to show the popup
-        function openPopup() {
+        /*function openPopup() {
             document.getElementById('popup-overlay').style.display = 'flex';
         }
 
         // Function to hide the popup
         function closePopup() {
             document.getElementById('popup-overlay').style.display = 'none';
-        }
+        }*/
+
+
+        function openPopup(itemName, serviceID, itemPrice, location) {
+    // Show the popup
+    document.getElementById("popup-overlay").style.display = "flex";
+
+    // Set the form values based on the clicked item
+    document.getElementById("popup-itemName").value = itemName;
+    document.getElementById("popup-serviceID").value = serviceID;
+    document.getElementById("popup-itemPrice").value = itemPrice;
+    document.getElementById("popup-location").value = location;
+}
+
+function closePopup() {
+    // Hide the popup
+    document.getElementById("popup-overlay").style.display = "none";
+}
+
     </script>
 </body>
 
