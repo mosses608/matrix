@@ -903,7 +903,7 @@ public function go_to_orderLogedIn()
 
     public function getAllOrderedServices(){
         return view('admin.admin-ordered-services', [
-            'orderedServices' => ServiceItemOrderd::latest()->filter(['search'])->paginate(6),
+            'orderedServices' => ServiceItemOrderd::latest()->filter(['search'])->paginate(60),
         ]);
     }
     
