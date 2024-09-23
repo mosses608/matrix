@@ -327,8 +327,16 @@
             .then(html => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                const newProjects = doc.querySelector('#projects-container').innerHTML;
-                document.querySelector('#projects-container').innerHTML += newProjects;
+                
+                //const newProjects = doc.querySelector('#projects-container').innerHTML;
+                //document.querySelector('#projects-container').innerHTML += newProjects;
+
+                // Only get the new project items, not the whole container
+                const newProjects = doc.querySelectorAll('#projects-container .col-xl-4');
+
+                newProjects.forEach(project => {
+                document.querySelector('#projects-container').appendChild(project);
+            });
 
                 if (!doc.querySelector('#load-more')) {
                     button.style.display = 'none'; // Hide button if no more pages
